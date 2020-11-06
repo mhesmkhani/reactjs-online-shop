@@ -1,4 +1,4 @@
 export const GET_CATEGORY = "GET_CATEGORY";
-export const GET_SUB_CATEGORY = "GET_SUB_CATEGORY";
-export const GET_SUB_SUB_CATEGORY = "GET_SUB_SUB_CATEGORY";
+export const USER_LOGIN = "USER_LOGIN";
+
 

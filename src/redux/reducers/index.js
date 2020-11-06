@@ -1,9 +1,7 @@
 import { combineReducers } from 'redux';
 import CategoryReducer from "./CategoryReducer";
-import SubCategoryReducer from "./SubCategoryReducer";
-import SubSubCategoryReducer from "./SubSubCategoryReducer";
+import AuthReducer from "./AuthReducer";
 export default combineReducers({
     category: CategoryReducer,
-    subcategory: SubCategoryReducer,
-    sub_subcategory: SubSubCategoryReducer
+    auth: AuthReducer
 })

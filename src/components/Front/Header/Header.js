@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import * as action from '../../../redux/actions/index'
+import * as action from '../../../redux/actions/CategoryAction'
 import PropTypes from 'prop-types';
 import Category from "./SubComponents/Category";
 import CartBasket from "./SubComponents/CartBasket";
@@ -14,8 +14,6 @@ class Header extends Component {
 
     componentDidMount() {
        this.props.fetchCategory();
-       this.props.fetchSubCategory();
-       this.props.fetchSubSubCategory();
     }
 
 

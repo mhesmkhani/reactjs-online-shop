@@ -78,8 +78,6 @@ Category.propTypes = {};
 const mapStateToProps = (state) => {
     return {
         category: state.category,
-        subcategory: state.subcategory,
-        sub_subcategory: state.sub_subcategory
     }
 }
 export default connect(mapStateToProps)(Category);
