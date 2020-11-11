@@ -3,7 +3,13 @@ import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import {NavLink} from "react-router-dom";
 import validator from 'validator';
+import Loader from "react-loader-spinner";
+
 import * as action from "../../../../redux/actions/AuthAction";
+import Header from "../../Header/Header";
+import Footer from "../../Footer/Footer";
+import {getApiToken} from "../../../../redux/actions/AuthAction";
+import Modal from "react-bootstrap/Modal";
 
 class Login extends Component {
     constructor(props) {
@@ -45,7 +51,8 @@ class Login extends Component {
         })
     }
 
-    loginUser = async () => {
+    loginUser = () => {
+
         this.setState({
             spinner: true
         });
@@ -53,13 +60,30 @@ class Login extends Component {
             phone: this.state.phone,
             password: this.state.password,
         }
-        this.props.UserLogin(data)
-        this.props.history.push(`/profile`);
+
+        this.props.UserLogin(data,(message,apiToken) => {
+            let errors = {}
+            let token = apiToken
+            if (message === 'success'){
+                this.props.SetApiToken(token)
+                this.props.history.push(`/profile`);
+            }else {
+                if(message === 'error'){
+                  errors["login"] = 'نام کاربری یا رمز عبور اشتباه است!'
+                    this.setState({
+                        spinner: false,
+                        errors
+                    })
+                }
+
+            }
+        });
     }
+
     render() {
-        const {errors} = this.state
+        const {errors,spinner} = this.state
         return (
-            <div>
+            <>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg">
@@ -73,7 +97,7 @@ class Login extends Component {
                                                     <span className="title">ورود</span>
                                                     <span className="sub-title">به دیجی اسمارت</span>
                                                 </NavLink>
-                                                <NavLink to="/register" className="register-ds">
+                                                <NavLink to="/receive-code" className="register-ds">
                                                     <span className="title">ثبت نام</span>
                                                     <span className="sub-title">در دیجی اسمارت</span>
                                                 </NavLink>
@@ -81,6 +105,17 @@ class Login extends Component {
                                             <div className="Login-to-account mt-4">
                                                 <div className="account-box-content">
                                                     <h4>ورود به حساب کاربری</h4>
+                                                    {
+                                                        errors["login"] ?
+                                                            <div className="alert alert-danger p-1" role="alert">
+                                                                <div className="text-center p-1" >
+                                                                    <h6 style={{ fontSize: "14px", marginTop: 6 }}> {errors["login"]} </h6>
+                                                                </div>
+                                                            </div>
+                                                            :
+                                                            <i className="d-none"></i>
+
+                                                    }
                                                     <div  className="form-account text-right">
                                                         <div className="form-account-title">
                                                             <label htmlFor="phone"> شماره موبایل</label>
@@ -113,9 +148,18 @@ class Login extends Component {
                                                             <label htmlFor="remember" className="remember-me mr-0">مرا
                                                                 به خاطر بسپار</label>
                                                         </div>
+                                                         {
+                                                                spinner ?
+                                                                    <div className="loading-parent d-flex justify-content-center position-absolute mt-3" >
+                                                                        <Loader className="text-center  position-absolute" type="Oval" color="#00bfd6" height={30} width={30} style={{zIndex:1600}}/>
+                                                                    </div>
+                                                                    :
+                                                                    null
+                                                         }
+
                                                         <div className="form-row-account">
                                                             <button onClick={this.handleSubmit} className="btn btn-primary btn-login">
-                                                              ورود به حساب
+                                                                ورود به حساب
                                                             </button>
                                                         </div>
                                                     </div>
@@ -128,7 +172,7 @@ class Login extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </>
         );
     }
 }

@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import * as action from '../../../redux/actions/CategoryAction'
 import PropTypes from 'prop-types';
 import Category from "./SubComponents/Category";
 import CartBasket from "./SubComponents/CartBasket";
 import Responsive from "./SubComponents/Responsive";
+import {NavLink} from "react-router-dom";
 
 class Header extends Component {
     constructor(props) {
@@ -13,12 +14,23 @@ class Header extends Component {
     }
 
     componentDidMount() {
-       this.props.fetchCategory();
+        this.props.fetchCategory();
     }
 
-
+    handleLogout = () => {
+        localStorage.clear();
+        window.location.href = '/';
+    }
 
     render() {
+        const userInfo = this.props.auth.userInfo.data;
+        let apiToken = ''
+        if (this.props.auth.apiToken.length < 1) {
+            apiToken = null
+        } else {
+            apiToken = this.props.auth.apiToken
+        }
+        const isAuthenticated = apiToken
         return (
             <>
                 <header className="header-main">
@@ -41,11 +53,11 @@ class Header extends Component {
                                                         <input type="search" className="header-search-input"
                                                                name="search-input"
                                                                placeholder="نام کالا، برند و یا دسته مورد نظر خود را جستجو کنید…"/>
-                                                            <div className="action-btns">
-                                                                <button className="btn btn-search" type="submit">
-                                                                    <i className="fa fa-search"></i>
-                                                                </button>
-                                                            </div>
+                                                        <div className="action-btns">
+                                                            <button className="btn btn-search" type="submit">
+                                                                <i className="fa fa-search"></i>
+                                                            </button>
+                                                        </div>
                                                     </form>
                                                 </div>
                                             </div>
@@ -58,26 +70,61 @@ class Header extends Component {
                                             <div className="d-block">
                                                 <div className="account-box">
                                                     <div className="nav-account d-block pl">
-                                            <span className="icon-account">
-                                                <img src="assets/images/man.png" className="avator"/>
-                                            </span>
-                                                        <span className="title-account">حساب کاربری</span>
-                                                        <div className="dropdown-menu">
-                                                            <ul className="account-uls mb-0">
-                                                                <li className="account-item">
-                                                                    <a href="#" className="account-link">پنل کاربری</a>
-                                                                </li>
-                                                                <li className="account-item">
-                                                                    <a href="#" className="account-link">سفارشات من</a>
-                                                                </li>
-                                                                <li className="account-item">
-                                                                    <a href="#" className="account-link">تنظیمات</a>
-                                                                </li>
-                                                                <li className="account-item">
-                                                                    <a href="#" className="account-link">خروج</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
+
+                                                        {
+                                                            isAuthenticated ?
+                                                                <span className="icon-account"> <img
+                                                                    src="assets/images/man.png"
+                                                                    className="avator"/> </span>
+                                                                :
+                                                                <NavLink to="/login">
+                                                                    <span className="icon-account"> <img
+                                                                        src="assets/images/man.png" className="avator"/> </span>
+                                                                </NavLink>
+                                                        }
+
+                                                        {
+                                                            isAuthenticated ?
+                                                                <span className="title-account">
+                                                                   <i style={{color: '#06B194'}}
+                                                                      className="mdi mdi-shield-check mx-1"></i>
+                                                                    {
+                                                                            userInfo ?
+                                                                            userInfo.phone
+                                                                            :
+                                                                            <span>کاربر سرمد</span>
+                                                                    }
+                                                                </span>
+                                                                :
+                                                                <NavLink to="/login">
+                                                                    <span className="btn btn-light title-account"> ورود به حساب کاربری</span>
+                                                                </NavLink>
+
+                                                        }
+                                                        {
+                                                            isAuthenticated ?
+                                                                <div className="dropdown-menu">
+                                                                    <ul className="account-uls mb-0">
+                                                                        <li className="account-item">
+                                                                            <NavLink to="/profile" className="account-link"> پروفایل</NavLink>
+
+                                                                        </li>
+                                                                        <li className="account-item">
+                                                                            <NavLink to="#" className="account-link">سفارشات  من</NavLink>
+
+                                                                        </li>
+
+                                                                        <li className="account-item">
+                                                                            <a onClick={this.handleLogout}
+                                                                               className="account-link">خروج</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                :
+                                                                null
+                                                        }
+
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -103,7 +150,8 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const mapStateToProps = (state) => {
-     return {
-     }
+    return {
+        auth: state.auth
+    }
 }
 export default connect(mapStateToProps, action)(Header);

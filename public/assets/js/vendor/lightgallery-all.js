@@ -6,7 +6,7 @@
 * Copyright (c) 2019 Sachin N; Licensed GPLv3 */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module unless amdModuleId is set
+    // AMD. ReciveCode as an anonymous module unless amdModuleId is set
     define(['jquery'], function (a0) {
       return (factory(a0));
     });
@@ -1369,7 +1369,7 @@
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module unless amdModuleId is set
+    // AMD. ReciveCode as an anonymous module unless amdModuleId is set
     define(['jquery'], function (a0) {
       return (factory(a0));
     });
@@ -1576,7 +1576,7 @@
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module unless amdModuleId is set
+    // AMD. ReciveCode as an anonymous module unless amdModuleId is set
     define(['jquery'], function (a0) {
       return (factory(a0));
     });
@@ -1703,7 +1703,7 @@
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module unless amdModuleId is set
+    // AMD. ReciveCode as an anonymous module unless amdModuleId is set
     define(['jquery'], function (a0) {
       return (factory(a0));
     });
@@ -1809,7 +1809,7 @@
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module unless amdModuleId is set
+    // AMD. ReciveCode as an anonymous module unless amdModuleId is set
     define(['jquery'], function (a0) {
       return (factory(a0));
     });
@@ -2288,7 +2288,7 @@
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module unless amdModuleId is set
+    // AMD. ReciveCode as an anonymous module unless amdModuleId is set
     define(['jquery'], function (a0) {
       return (factory(a0));
     });
@@ -2631,7 +2631,7 @@
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module unless amdModuleId is set
+    // AMD. ReciveCode as an anonymous module unless amdModuleId is set
     define(['jquery'], function (a0) {
       return (factory(a0));
     });
@@ -3159,7 +3159,7 @@
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module unless amdModuleId is set
+    // AMD. ReciveCode as an anonymous module unless amdModuleId is set
     define(['jquery'], function (a0) {
       return (factory(a0));
     });
@@ -3261,7 +3261,7 @@
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module unless amdModuleId is set
+    // AMD. ReciveCode as an anonymous module unless amdModuleId is set
     define(['jquery'], function (a0) {
       return (factory(a0));
     });

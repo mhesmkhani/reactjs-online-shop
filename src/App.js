@@ -7,18 +7,26 @@ import Slider from "./components/Front/Slider/Slider";
 import Footer from "./components/Front/Footer/Footer";
 import Login from "./components/Front/Auth/Login/Login";
 import Test from "./components/Front/Test";
-import Register from "./components/Front/Auth/Register/Register";
+import ReceiveCode from "./components/Front/Auth/Register/ReceiveCode";
+import VerifyCode from "./components/Front/Auth/Register/VerifyCode";
+import CreatePassword from "./components/Front/Auth/Register/CreatePassword";
 import Profile from "./components/Front/Profile/Profile";
-function App() {
+import PrivateRoute from "./PrivateRoute.js";
+import Uploader from "./components/Back/Uploader";
+ function App() {
   return (
       <>
+
        <Router basename="/" >
              <Switch>
                <Route exact path="/" component={Home} />
                <Route path="/cart" component={Test} />
                <Route path="/login" component={Login} />
-               <Route path="/register" component={Register} />
-               <Route path="/profile" component={Profile} />
+               <Route path="/receive-code" component={ReceiveCode} />
+               <Route path="/verify-code" component={VerifyCode} />
+               <Route path="/create-password" component={CreatePassword} />
+               <Route path="/upload" component={Uploader}/>
+               <PrivateRoute path="/profile" component={Profile} />
              </Switch>
        </Router>
      </>

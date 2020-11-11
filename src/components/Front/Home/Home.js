@@ -21,11 +21,11 @@ class Home extends Component {
 
     render() {
         return (
-            <div>
+            <>
                 <Header/>
                  <Slider/>
                 <Footer/>
-            </div>
+            </>
         );
     }
 }

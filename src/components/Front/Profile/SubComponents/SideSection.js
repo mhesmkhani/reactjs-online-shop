@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from "react-redux";
 
 class SideSection extends Component {
     constructor(props) {
@@ -7,35 +8,19 @@ class SideSection extends Component {
 
     }
 
-    componentWillMount() {
-
-    }
 
     componentDidMount() {
 
     }
 
-    componentWillReceiveProps(nextProps) {
-
+    handleLogout = () => {
+        localStorage.clear();
+        window.location.href = '/';
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-
-    }
-
-    componentWillUpdate(nextProps, nextState) {
-
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-
-    }
-
-    componentWillUnmount() {
-
-    }
 
     render() {
+        const userInfo = this.props.auth.userInfo.data;
         return (
             <div>
                 <div className="col-lg-3 col-md-3 col-xs-12 pr">
@@ -47,12 +32,23 @@ class SideSection extends Component {
                                 </div>
                             </header>
                             <footer className="profile-box-content-footer">
-                                <span className="profile-box-nameuser">حسن شجاعی</span>
-                                <span
-                                    className="profile-box-registery-date">عضویت در سایت 2 پیش</span>
-                                <span className="profile-box-phone">شماره همراه : *******0991</span>
+                                {
+                                    userInfo.fullname != null ?
+                                        <span className="profile-box-nameuser">{userInfo.fullname}</span>
+                                        :
+                                        <span className="profile-box-nameuser">کاربر سرمد</span>
+
+                                }
+                                 <br/>
+                                {
+                                    userInfo.phone != null ?
+                                        <span className="profile-box-phone"> شماره همراه :  {userInfo.phone} </span>
+                                        :
+                                        <span className="profile-box-phone">شماره همراه : خالی</span>
+
+                                }
                                 <div className="profile-box-tabs">
-                                    <a href="#" className="profile-box-tab-sign-out"><i
+                                    <a onClick={this.handleLogout} href="#" className="profile-box-tab-sign-out"><i
                                         className="mdi mdi-logout-variant"></i>خروج از حساب</a>
                                 </div>
                             </footer>
@@ -102,5 +98,9 @@ class SideSection extends Component {
 }
 
 SideSection.propTypes = {};
-
-export default SideSection;
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth
+    }
+}
+export default connect(mapStateToProps)(SideSection);

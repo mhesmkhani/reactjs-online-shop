@@ -922,7 +922,7 @@ header.header-main{
     background-color: rgba(125, 125, 125, 0.5);
     z-index: 1001;
   }
-  
+
   .nav-btn {
     cursor: pointer;
     display: inline-block;
@@ -937,13 +937,13 @@ header.header-main{
     position: absolute;
     top: 100px;
     right: 10px;
-      
+
   }
-  
+
   .nav-btn.nav-slider {
     float: right;
   }
-  
+
   .nav-btn.nav-slider span.linee1 {
       background: #666666;
       height: 3px;
@@ -971,19 +971,19 @@ header.header-main{
       top: 26px;
       border-radius: 25%;
   }
-  
+
   .nav-btn i {
     vertical-align: middle;
   }
-  
+
   .header-menu {
     float: left;
   }
-  
+
   .header-menu ul {
     height: 64px;
   }
-  
+
   .header-menu ul li {
     display: block;
     position: relative;
@@ -992,7 +992,7 @@ header.header-main{
     padding: 0 12px 0 0;
     line-height: 64px;
   }
-  
+
   .header-menu ul li a {
     color: #333;
     padding: 4px;
@@ -1004,7 +1004,7 @@ header.header-main{
     -o-transition: all 0.3s;
     transition: all 0.3s;
   }
-  
+
   .header-menu ul li a i {
     margin-right: 5px;
     font-size: 24px;
@@ -1012,13 +1012,13 @@ header.header-main{
     left: 0;
     top: -16px;
   }
-  
+
   @media only screen and (max-width: 1024px) {
     header .header-categories {
       display: none;
     }
   }
-  
+
   @media only screen and (max-width: 480px) {
     header .header-inner {
       padding: 0 12px;
@@ -1045,17 +1045,17 @@ header.header-main{
     opacity: 0.9;
     z-index: 1002;
   }
-  
+
   .sidebar .nav-header {
     display: block;
     height: 90px;
   }
-  
+
   .sidebar .nav-header img.pic-header {
     position: absolute;
     z-index: -1;
   }
-  
+
   .sidebar .nav-header .header-cover {
     position: absolute;
     width: 100%;
@@ -1064,7 +1064,7 @@ header.header-main{
     background-color: #fff;
     z-index: -1;
   }
-  
+
   .sidebar .nav-header .logo-wrap {
       padding: 1.2em 0;
       text-align: center;
@@ -1072,17 +1072,17 @@ header.header-main{
       width: 200px;
       margin-right: 25px;
   }
-  
+
   .sidebar .nav-header .logo-wrap .logo-icon {
     display: inline-block;
     text-decoration: none;
   }
-  
+
   .sidebar .nav-header .logo-wrap .logo-icon img {
     display: block;
     width: 130px;
   }
-  
+
   .sidebar .nav-header .logo-wrap .logo-text {
     display: inline-block;
     color: #fff;
@@ -1097,13 +1097,13 @@ header.header-main{
   .sidebar .nav-categories {
     margin-top: 5px;
   }
-  
+
   .sidebar .nav-categories li {
     display: block;
     position: relative;
     text-align: right;
   }
-  
+
   .sidebar .nav-categories li::before {
     position: absolute;
     left: 7px;
@@ -1111,7 +1111,7 @@ header.header-main{
     color: #333;
     font-size: 24px;
   }
-  
+
   .sidebar .nav-categories li a {
     display: block;
     width: 85%;
@@ -1125,7 +1125,7 @@ header.header-main{
       transition: all 400ms ease;
       background: none;
   }
-  
+
   .sidebar .nav-categories li a:hover{
       color: #333;
       font-weight: 700;
@@ -1133,14 +1133,14 @@ header.header-main{
       -o-transition: all 400ms ease;
       transition: all 400ms ease;
   }
-  
+
   .sidebar.open {
     right: 0px;
     -webkit-box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.275);
     box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.275);
     opacity: 1;
   }
-  
+
   .sidebar > ul > li > a {
       font-size: 16px;
       display: block;
@@ -1149,7 +1149,7 @@ header.header-main{
       color: #757575;
       font-weight: bold;
   }
-  
+
   .sidebar > ul > li > ul > li > a {
       font-size: 16px;
       display: block;
@@ -1157,26 +1157,26 @@ header.header-main{
       background: #f5f5f5;
       color: #757575;
   }
-  
+
   .sidebar a {
       cursor: pointer;
   }
-  
+
   .sidebar > ul > li {
       position: relative;
   }
-  
+
   .sidebar ul li a.category-level-2{
       margin-right: 45px;
       width: 70%;
   }
-  
+
   .sidebar ul li ul li a.category-level-3{
       margin-right: 60px;
       width: 68%;
       font-weight: 300;
   }
-  
+
   .sidebar > ul > li.has-sub > a::before {
       position: absolute;
       content: '';
@@ -1191,7 +1191,7 @@ header.header-main{
       -o-transition: all .3s;
       transition: all .3s;
   }
-  
+
   .sidebar > ul > li ul > li.has-sub > a::after {
       position: absolute;
       content: '';
@@ -1206,7 +1206,7 @@ header.header-main{
       -o-transition: all .3s;
       transition: all .3s;
   }
-  
+
   .sidebar > ul > li ul > li.has-sub > a::before {
       position: absolute;
       content: '';
@@ -1221,7 +1221,7 @@ header.header-main{
       -o-transition: all .3s;
       transition: all .3s;
   }
-  
+
   .sidebar > ul > li.has-sub > a::after {
       position: absolute;
       content: '';
@@ -1236,23 +1236,23 @@ header.header-main{
       -o-transition: all .3s;
       transition: all .3s;
   }
-  
+
   .sidebar > ul > li.has-sub.open > a::before {
       transform: rotate(45deg);
   }
-  
+
   .sidebar > ul > li.has-sub.open > a::after {
       transform: rotate(45deg);
   }
-  
+
   .sidebar > ul li ul > li.has-sub.open > a::before {
       transform: rotate(45deg);
   }
-  
+
   .sidebar > ul li ul > li.has-sub.open > a::after {
       transform: rotate(45deg);
   }
-  
+
   .sidebar ul ul {
       background: #fff;
       width: 100%;
@@ -1283,14 +1283,14 @@ header.header-main{
     transition: all 300ms ease;
     color: #666666;
 }
-  
+
   .main {
       width: 1300px;
       height: auto;
       background: aliceblue;
       margin: 0 auto;
   }
-  
+
   .clear{
       clear: both;
   }
@@ -1300,7 +1300,7 @@ header.header-main{
       background: deepskyblue;
       float: left;
   }
-  
+
   /*responsive-menu-------------*/
 
 /* sidebar---------------------*/
@@ -3248,7 +3248,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
     color: #908888;
     width: 25%;
     background-color: #f9f9f9;
-} 
+}
 
 .post-item-cart .content-page .cart-form .table tbody th .product-remove{
     width: 100%;
@@ -3349,19 +3349,19 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 .quantity {
     position: relative;
   }
-  
+
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button
   {
     -webkit-appearance: none;
     margin: 0;
   }
-  
+
   input[type=number]
   {
     -moz-appearance: textfield;
   }
-  
+
 .quantity input {
     width: 90px;
     height: 30px;
@@ -3378,19 +3378,19 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
     font-size: 1.071rem;
     color: #8e8e8e;
     border-radius: 20px;
-    
+
   }
-  
+
 .quantity input:focus {
     outline: 0;
   }
-  
+
 .quantity-nav {
     float: right;
     position: relative;
     height: 42px;
   }
-  
+
 .quantity-button {
     position: relative;
     cursor: pointer;
@@ -3409,7 +3409,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
     user-select: none;
     font-size: 1.071rem;
   }
-  
+
 .quantity-button.quantity-up {
     position: absolute;
     height: 25px;
@@ -3429,7 +3429,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
     color: #fff;
     transition: .2s;
 }
-  
+
 .quantity-button.quantity-down {
     position: absolute;
     height: 25px;
@@ -3610,7 +3610,7 @@ span.shipping-destination{
     border: 1px solid #eee;
     outline: none;
     padding: 0 10px;
-    font-size: 13px; 
+    font-size: 13px;
     color: #666666;
 }
 
@@ -3883,7 +3883,7 @@ span.shipping-destination{
     margin-top: 5px;
 }
 
-.account-box-content .form-row-account button{
+.account-box-content .form-row-account .btn-login{
     width: 100%;
     height: 30px;
     line-height: 14px;
@@ -3891,6 +3891,21 @@ span.shipping-destination{
     border-radius: 20px;
     background: #00bfd6 !important;
     border-color: #00bfd6;
+    color: #ffffff;
+    font-size: 14px;
+    outline: none;
+    transition: .2s;
+}
+.disable-btn{
+    background-color: #ade7ef;
+    color: #ffffff;
+}
+.account-box-content .form-row-account .btn{
+    width: 100%;
+    height: 30px;
+    line-height: 14px;
+    margin: 20px 0;
+    border-radius: 20px;
     font-size: 14px;
     outline: none;
     transition: .2s;
@@ -3924,7 +3939,7 @@ span.shipping-destination{
 
 .account-box-content .made-account{
     margin-top: 60px;
-    text-align: center;  
+    text-align: center;
     margin-bottom: 20px;
 
 }
@@ -4145,7 +4160,7 @@ span.shipping-destination{
 
 .post-item-profile .sidebar-profile .profile-box .profile-box-content-footer span.profile-box-registery-date{
     display: block;
-} 
+}
 
 .post-item-profile .sidebar-profile .profile-box .profile-box-content-footer .profile-box-tabs{
     width: 100%;
@@ -4573,7 +4588,7 @@ span.shipping-destination{
     margin-top: 15px;
     margin-bottom: 15px;
     height: auto;
-    
+
 }
 
 .middle-container .form-checkout .form-checkout-row .validate-required{
@@ -5173,7 +5188,7 @@ span.shipping-destination{
     padding: 15px;
     border-radius: 20px;
     text-align: center;
-} 
+}
 
 .product .product-gallery .gallery .gallery-item ul.gallery-actions li.option-social .email-sharing > h5.share-title{
     color: #666666;
@@ -5232,15 +5247,15 @@ span.shipping-destination{
 
 .product .product-gallery .gallery .gallery-item ul.gallery-actions li.option-social .modal-body .share-options .share-social-buttons .share-social-facebook{
     background-image: linear-gradient( 135deg, #90b9f7 10%, #324ccc 100%);
-} 
+}
 
 .product .product-gallery .gallery .gallery-item ul.gallery-actions li.option-social .modal-body .share-options .share-social-buttons .share-social-whatsapp{
     background-image: linear-gradient( 135deg, #70F570 10%, #49C628 100%);
-}  
+}
 
 .product .product-gallery .gallery .gallery-item ul.gallery-actions li.option-social .modal-body .share-options .share-social-buttons .share-social-email-outline{
     background-image: linear-gradient( 135deg, #f9a6a6 10%, #f54c4c 100%);
-}  
+}
 
 .product .product-gallery .gallery .gallery-item ul.gallery-actions li.option-social .modal-body .form-share-col{
     position: relative;
@@ -7697,8 +7712,8 @@ footer.footer-main-site .footer-middlebar .footer-copyright .footer-copyright-te
 .progress-wrap:hover::before {
     opacity: 1;
 }
-.progress-wrap svg path { 
-	fill: none; 
+.progress-wrap svg path {
+	fill: none;
 }
 .progress-wrap svg.progress-circle path {
 	stroke: #00bfd6;
@@ -7717,3 +7732,15 @@ body.light .progress-wrap svg.progress-circle path {
 	stroke: var(--black-blue);
 }
 
+.loading-parent{
+    z-index: 1;
+    background-color: #FFFFFF;
+    opacity: 0.85;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    right: 0;
+}
+.cursor-pointer{
+    cursor: pointer;
+}

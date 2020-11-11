@@ -10,13 +10,20 @@ export class PrivateRoute extends Component {
         // path : PropTyps.string.isRequired
     };
 
+
     render() {
         const { component: Component,  ...restProps } = this.props;
-        const isAuthenticated = this.props.isAuthenticated
+        let apiToken = ''
+        if(this.props.auth.apiToken.length < 1){
+            apiToken = null
+        }else {
+            apiToken = this.props.auth.apiToken
+        }
+        const isAuthenticated = apiToken
 
         return <Route {...restProps} render={(props) => (
 
-            isAuthenticated[0] ? (
+            isAuthenticated ? (
                 // alert("success"),
                 <Component {...props}/>
             ) : (
@@ -30,7 +37,7 @@ export class PrivateRoute extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        // isAuthenticated: state.setIsAuth
+        auth: state.auth
     }
 }
 export default connect(mapStateToProps)(PrivateRoute)

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 //redux dependency
@@ -12,6 +12,7 @@ import storage from 'redux-persist/lib/storage' // defaults to localStorage for 
 import { PersistGate } from 'redux-persist/integration/react'
 import reducers from './redux/reducers/index'
 import { composeWithDevTools } from 'redux-devtools-extension';
+import {BrowserRouter} from "react-router-dom";
 const persistConfig = {
     key: 'root',
     storage,
@@ -26,7 +27,9 @@ const persistor = persistStore(store)
 ReactDOM.render(
     <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
+            <BrowserRouter>
             <App />
+            </BrowserRouter>
         </PersistGate>
     </Provider>,
 
