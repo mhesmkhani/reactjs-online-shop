@@ -13,6 +13,8 @@ import CreatePassword from "./components/Front/Auth/Register/CreatePassword";
 import Profile from "./components/Front/Profile/Profile";
 import PrivateRoute from "./PrivateRoute.js";
 import Uploader from "./components/Back/Uploader";
+import Archive from "./components/Front/Archive/Archive";
+import SingleProduct from "./components/Front/SingleProduct/SingleProduct";
  function App() {
   return (
       <>
@@ -25,6 +27,8 @@ import Uploader from "./components/Back/Uploader";
                <Route path="/receive-code" component={ReceiveCode} />
                <Route path="/verify-code" component={VerifyCode} />
                <Route path="/create-password" component={CreatePassword} />
+               <Route path="/category/search" component={Archive} />
+               <Route path="/product" component={SingleProduct} />
                <Route path="/upload" component={Uploader}/>
                <PrivateRoute path="/profile" component={Profile} />
              </Switch>

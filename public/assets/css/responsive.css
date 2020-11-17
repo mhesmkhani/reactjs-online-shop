@@ -32,7 +32,7 @@
     .slider-main-container .carousel-indicators-ul{
         background: none;
     }
-    
+
     .slider-main-container .carousel-indicators-ul > li.carousel-indicators-item{
         width: 10px;
         height: 10px;
@@ -394,6 +394,9 @@
 }
 
 @media (max-width: 510px){
+    .background-main-image{
+        width: 280px;
+    }
     .product .product-gallery .gallery .gallery-item ul.gallery-actions li.option-social .email-sharing .share-email-address{
         width: 100%;
         padding-left: 100px;
@@ -642,7 +645,7 @@
         width: 100%;
         font-size: 12px;
     }
-    
+
     .post-item-profile .profile-content .profile-stats .table-orders .collapse .profile-orders-item .profile-orders-header a.profile-orders-header-details .profile-orders-header-state{
         margin-right: 0;
         margin-top: 5px;
@@ -752,6 +755,9 @@
 }
 
 @media (max-width: 350px){
+    .background-main-image{
+        width: 230px;
+    }
     .product .product-gallery .gallery .gallery-item .gallery-img .zoomWrapper{
         height: 200px !important;
     }

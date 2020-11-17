@@ -1,5 +1,6 @@
+import $ from 'jquery';
+
 $(document).ready(function(){
-  
         //    hover-menu-overlay--------------------------
             $('li.nav-overlay').hover(function(){
                 $('.mega-menu-level-two').removeClass('active');
@@ -37,8 +38,8 @@ $(document).ready(function(){
             }
             $(this).hide();
           });
-    
-    
+
+
             $('li.active').addClass('open').children('ul').show();
             $("li.has-sub > a").on('click', function () {
                 $(this).removeAttr('href');
@@ -155,7 +156,7 @@ $(document).ready(function(){
                 992: {
                     items: 1,
                     slideBy: 1,
-                    autoplay:true,                   
+                    autoplay:true,
                 },
                 1400: {
                     items: 1,
@@ -165,7 +166,7 @@ $(document).ready(function(){
             }
         });
         // Symbol--------------------------------------
-        
+
         $("#suggestion-slider").owlCarousel({
             rtl: true,
             items: 1,
@@ -177,14 +178,14 @@ $(document).ready(function(){
             onTranslate: resetProgressBar,
             onTranslated: startProgressBar
         });
-        
+
         function startProgressBar() {
           $(".slide-progress").css({
             width: "100%",
             transition: "width 5000ms"
           });
         }
-    
+
         function resetProgressBar() {
           $(".slide-progress").css({
             width: 0,
@@ -302,14 +303,14 @@ $(document).ready(function(){
         //    quantity-selector---------------------------
 
         // scroll_progress-------------------------
-        
+
 		var progressPath = document.querySelector('.progress-wrap path');
 		var pathLength = progressPath.getTotalLength();
 		progressPath.style.transition = progressPath.style.WebkitTransition = 'none';
 		progressPath.style.strokeDasharray = pathLength + ' ' + pathLength;
 		progressPath.style.strokeDashoffset = pathLength;
 		progressPath.getBoundingClientRect();
-		progressPath.style.transition = progressPath.style.WebkitTransition = 'stroke-dashoffset 10ms linear';		
+		progressPath.style.transition = progressPath.style.WebkitTransition = 'stroke-dashoffset 10ms linear';
 		var updateProgress = function () {
 			var scroll = $(window).scrollTop();
 			var height = $(document).height() - $(window).height();
@@ -317,7 +318,7 @@ $(document).ready(function(){
 			progressPath.style.strokeDashoffset = progress;
 		}
 		updateProgress();
-		$(window).scroll(updateProgress);	
+		$(window).scroll(updateProgress);
 		var offset = 50;
 		var duration = 1500;
 		jQuery(window).on('scroll', function() {
@@ -326,18 +327,18 @@ $(document).ready(function(){
 			} else {
 				jQuery('.progress-wrap').removeClass('active-progress');
 			}
-		});				
+		});
 		jQuery('.progress-wrap').on('click', function(event) {
 			event.preventDefault();
 			jQuery('html, body').animate({scrollTop: 0}, duration);
 			return false;
         });
 
-        
+
         //    verify-phone-number------------------------
         if($("#countdown-verify-end").length) {
             var $countdownOptionEnd = $("#countdown-verify-end");
-    
+
             $countdownOptionEnd.countdown({
             date: (new Date()).getTime() + 180 * 1000, // 1 minute later
             text: '<span class="day">%s</span><span class="hour">%s</span><span>: %s</span><span>%s</span>',
@@ -387,12 +388,12 @@ $(document).ready(function(){
                 }
             }
         });
-    
+
         $('.back-to-top').click(function (e) {
             e.preventDefault();
             $('html, body').animate({ scrollTop: 0 }, 800, 'easeInExpo');
         });
-    
+
         if ($("#img-product-zoom").length) {
             $("#img-product-zoom").ezPlus({
                 zoomType: "inner",
@@ -410,7 +411,7 @@ $(document).ready(function(){
 
         var $customEvents = $('#custom-events');
         $customEvents.lightGallery();
-         
+
         var colours = ['#21171A', '#81575E', '#9C5043', '#8F655D'];
         $customEvents.on('onBeforeSlide.lg', function(event, prevIndex, index){
             $('.lg-outer').css('background-color', colours[index])

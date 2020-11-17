@@ -1,5 +1,8 @@
 export const GET_CATEGORY = "GET_CATEGORY";
 export const USER_LOGIN = "USER_LOGIN";
 export const GET_API_TOKEN = "GET_API_TOKEN";
+export const GET_SEARCH_PRODUCT = "GET_SEARCH_PRODUCT";
+export const SET_SEARCH_VALUE = "SET_SEARCH_VALUE";
+export const GET_SINGLE_PRODUCT = "GET_SINGLE_PRODUCT";
 
 

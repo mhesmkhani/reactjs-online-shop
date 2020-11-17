@@ -6,7 +6,7 @@ import Category from "./SubComponents/Category";
 import CartBasket from "./SubComponents/CartBasket";
 import Responsive from "./SubComponents/Responsive";
 import {NavLink} from "react-router-dom";
-
+import Icon from "../../../Config/GlobaliCons";
 class Header extends Component {
     constructor(props) {
         super(props);
@@ -41,9 +41,9 @@ class Header extends Component {
                                     <div className="header-right">
                                         <div className="col-lg-3 pr">
                                             <div className="header-logo row text-right">
-                                                <a href="#">
-                                                    <img src="assets/images/logo.png" alt="دیجی اسمارت"/>
-                                                </a>
+                                                <NavLink to="/">
+                                                    <img src={Icon.Logo} alt="دیجی اسمارت"/>
+                                                </NavLink>
                                             </div>
                                         </div>
                                         <div className="col-lg-9 pl">
@@ -74,12 +74,12 @@ class Header extends Component {
                                                         {
                                                             isAuthenticated ?
                                                                 <span className="icon-account"> <img
-                                                                    src="assets/images/man.png"
+                                                                    src={Icon.Man}
                                                                     className="avator"/> </span>
                                                                 :
                                                                 <NavLink to="/login">
                                                                     <span className="icon-account"> <img
-                                                                        src="assets/images/man.png" className="avator"/> </span>
+                                                                        src={Icon.Man} className="avator"/> </span>
                                                                 </NavLink>
                                                         }
 

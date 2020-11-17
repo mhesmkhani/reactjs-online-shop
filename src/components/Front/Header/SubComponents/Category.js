@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import CartBasket from "./CartBasket";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
+import * as action from '../../../../redux/actions/SearchProductAction'
 
 class Category extends Component {
     constructor(props) {
@@ -13,16 +15,13 @@ class Category extends Component {
     componentDidMount() {
 
     }
-
+    handleGetSearch = (data) => {
+        this.props.getsearchValue(data)
+    }
 
     render() {
         const {category} = this.props;
         const categoryData = category.category;
-        const subCategory = categoryData.map(item => item.subcategories.map(item => item.title));
-        const subSubCategory = categoryData.map(item => item.subcategories.map(item => item.sub_subcategories.map(item => item)));
-
-        console.log(subCategory)
-        // console.log(subSubCategory)
         return (
             <>
                 <nav className="header-main-nav">
@@ -46,11 +45,10 @@ class Category extends Component {
                                                                 {
                                                                     subcategory.sub_subcategories.map(item =>
                                                                     <li className="menu-mega-item-three">
-                                                                    <a href="#">
+                                                                    <Link to={"/category/search?q=" + (item.title.replace(/ /g, "-"))} onClick={() => this.handleGetSearch(item.title.replace(/ /g, "-"))}>
                                                                         {item.title}
-                                                                    </a>
+                                                                    </Link >
                                                                     </li>
-
                                                                     )}
 
                                                             </ul>
@@ -80,4 +78,4 @@ const mapStateToProps = (state) => {
         category: state.category,
     }
 }
-export default connect(mapStateToProps)(Category);
+export default connect(mapStateToProps,action)(Category);

@@ -4,7 +4,6 @@ import {GET_API_TOKEN, USER_LOGIN} from "./ActionTypes";
 
 export const ExpireToken = (config,callback) => {
         let message = '';
-
 }
 
 export const SetApiToken = (token) => {
