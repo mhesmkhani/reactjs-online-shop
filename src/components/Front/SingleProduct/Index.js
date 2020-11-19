@@ -5,6 +5,7 @@ import BreadCrumb from "./SubComponents/BreadCrumb";
 import Content from "./SubComponents/Content";
 import Icons from "./SubComponents/Icons";
 import Tabs from "./SubComponents/Tabs";
+import {connect} from "react-redux";
 
 class Index extends Component {
     constructor(props) {
@@ -22,35 +23,48 @@ class Index extends Component {
 
 
     render() {
+        const singleProduct = this.props.singleProduct.singleProduct.length
+         console.log(this.props.singleProduct.singleProduct.length)
         return (
             <>
-                <div class="container-main">
-                    <div class="d-block">
-                        <div class="page-content page-row">
-                            <div class="main-row">
-                                {/*url helpers*/}
-                                <BreadCrumb/>
-                                <div class="col-lg">
-                                    <div class="product type-product">
-                                        {/*Gallery*/}
-                                        <Gallery/>
-                                        {/*content*/}
-                                        <Content/>
-                                        {/*icons*/}
-                                        <Icons/>
+                {
+                    singleProduct > 0 ?
+                        <div className="container-main">
+                            <div className="d-block">
+                                <div className="page-content page-row">
+                                    <div className="main-row">
+                                        {/*url helpers*/}
+                                        <BreadCrumb/>
+                                        <div className="col-lg">
+                                            <div className="product type-product">
+                                                {/*Gallery*/}
+                                                <Gallery/>
+                                                {/*content*/}
+                                                <Content/>
+                                                {/*icons*/}
+                                                <Icons/>
+                                            </div>
+                                        </div>
                                     </div>
+                                    {/*tabs&information*/}
+                                    <Tabs/>
                                 </div>
                             </div>
-                            {/*tabs&information*/}
-                            <Tabs/>
                         </div>
-                    </div>
-                </div>
+                        :
+                        null
+                }
+
             </>
         );
     }
 }
 
 Index.propTypes = {};
-
-export default Index;
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth,
+        singleProduct: state.singleProduct
+    }
+}
+export default connect(mapStateToProps)(Index);

@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import {GET_SEARCH_PRODUCT, SET_SEARCH_VALUE} from "./ActionTypes";
+import {GET_CLEAR_SINGLE_PRODUCT, GET_SEARCH_PRODUCT} from "./ActionTypes";
 
 export function fetchSearch(search) {
     return dispatch => {
@@ -23,6 +23,12 @@ const setSearchData = (searchProduct) => {
 export function getsearchValue(value) {
     return dispatch => {
          this.fetchSearch(value)
+    }
+}
+export function setClearSingleProduct(clearSingleProduct) {
+    return {
+        type: GET_CLEAR_SINGLE_PRODUCT,
+        clearSingleProduct,
     }
 }
 

@@ -42,7 +42,7 @@ class Header extends Component {
                                         <div className="col-lg-3 pr">
                                             <div className="header-logo row text-right">
                                                 <NavLink to="/">
-                                                    <img src={Icon.Logo} alt="دیجی اسمارت"/>
+                                                    <img src={Icon.Logo} alt="سرمد"/>
                                                 </NavLink>
                                             </div>
                                         </div>

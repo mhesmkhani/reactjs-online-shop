@@ -3121,7 +3121,10 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
     margin-left: 10px;
     position: relative;
 }
-
+.product-box:hover{
+    margin-top: -2px;
+    transition: 0.25s;
+ }
 .shop-archive-content .product-items .product-box .thumb .promotion-badge{
     color: #f7858d;
     width: 100%;

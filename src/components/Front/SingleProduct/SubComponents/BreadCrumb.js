@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from "react-redux";
+import * as action from '../../../../redux/actions/BreadCrumbAction'
 
 class BreadCrumb extends Component {
     constructor(props) {
         super(props);
-
     }
 
     componentWillMount() {
@@ -12,10 +13,16 @@ class BreadCrumb extends Component {
     }
 
     componentDidMount() {
-
+        const singleProdcut = this.props.singleProduct.singleProduct;
+        const id = singleProdcut.map(product => product.sub_sub_category_id)
+        this.props.getBreadCrumb(id)
     }
 
     render() {
+            const productTitle = this.props.singleProduct.singleProduct.map(product => product.title);
+            const categoryTitle = this.props.breadCrumb.breadCrumb.map(category => category.title);
+            const subcategorieTitle = this.props.breadCrumb.breadCrumb.map(category => category.subcategories.map( subcategorie => subcategorie.title));
+
         return (
             <div>
                 <div id="breadcrumb">
@@ -23,12 +30,9 @@ class BreadCrumb extends Component {
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item"><a href="#">خانه</a></li>
-                            <li className="breadcrumb-item"><a href="#">کالای دیجیتال</a></li>
-                            <li className="breadcrumb-item"><a href="#">موبایل</a></li>
-                            <li className="breadcrumb-item active" aria-current="page">گوشی موبایل
-                                سامسونگ
-                                مدل Galaxy Note 10 SM-N970F/DS دو سیم‌کارت ظرفیت 256 گیگابایت
-                            </li>
+                            <li className="breadcrumb-item"><a href="#">{categoryTitle}</a></li>
+                            <li className="breadcrumb-item"><a href="#">{subcategorieTitle}</a></li>
+                            <li className="breadcrumb-item active" aria-current="page">{productTitle}</li>
                         </ol>
                     </nav>
                 </div>
@@ -38,5 +42,11 @@ class BreadCrumb extends Component {
 }
 
 BreadCrumb.propTypes = {};
-
-export default BreadCrumb;
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth,
+        singleProduct: state.singleProduct,
+        breadCrumb: state.breadCrumb
+    }
+}
+export default connect(mapStateToProps, action)(BreadCrumb);

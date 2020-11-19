@@ -16,7 +16,9 @@ class Category extends Component {
 
     }
     handleGetSearch = (data) => {
+        const value = {}
         this.props.getsearchValue(data)
+        this.props.setClearSingleProduct(value)
     }
 
     render() {

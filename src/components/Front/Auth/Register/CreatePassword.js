@@ -121,11 +121,11 @@ class CreatePassword extends Component {
                                             <div className="account-box-headline">
                                                 <NavLink to="/login" className="login-ds" activeClassName="active">
                                                     <span className="title">ورود</span>
-                                                    <span className="sub-title">به دیجی اسمارت</span>
+                                                    <span className="sub-title">به سرمد</span>
                                                 </NavLink>
                                                 <NavLink to="/create-password" className="register-ds">
                                                     <span className="title">ثبت نام </span>
-                                                    <span className="sub-title">در دیجی اسمارت</span>
+                                                    <span className="sub-title">در سرمد</span>
                                                 </NavLink>
                                             </div>
                                             <div className="Login-to-account mt-4">

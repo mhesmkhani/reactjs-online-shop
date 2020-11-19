@@ -71,18 +71,18 @@ class Footer extends Component {
                                                     <section className="footer-links-col">
                                                         <div className="headline-links">
                                                             <a href="#">
-                                                                با دیجی اسمارت
+                                                                با سرمد
                                                             </a>
                                                         </div>
                                                         <ul className="footer-menu-ul">
                                                             <li className="menu-item-type-custom">
                                                                 <a href="#">
-                                                                    اتاق خبر دیجی اسمارت
+                                                                    اتاق خبر سرمد
                                                                 </a>
                                                             </li>
                                                             <li className="menu-item-type-custom">
                                                                 <a href="#">
-                                                                    فروش در دیجی اسمارت
+                                                                    فروش در سرمد
                                                                 </a>
                                                             </li>
                                                             <li className="menu-item-type-custom">
@@ -137,7 +137,7 @@ class Footer extends Component {
                                                     <section className="footer-links-col">
                                                         <div className="headline-links">
                                                             <a href="#">
-                                                                راهنمای خرید از دیجی اسمارت
+                                                                راهنمای خرید از سرمد
                                                             </a>
                                                         </div>
                                                         <ul className="footer-menu-ul">
@@ -179,8 +179,8 @@ class Footer extends Component {
                                         <div className="col-lg-10 pr">
                                             <div className="footer-content d-block">
                                                 <div className="text pr-1">
-                                                    <h2 className="title">فروشگاه اینترنتی دیجی اسمارت</h2>
-                                                    <p className="desc"> دیجی اسمارت به عنوان یکی از قدیمی‌ترین فروشگاه های اینترنتی با بیش از یک دهه تجربه، با پایبندی به سه اصل کلیدی، پرداخت در محل، 7 روز ضمانت بازگشت کالا و تضمین اصل‌بودن کالا، موفق شده تا همگام با فروشگاه‌های معتبر جهان، به بزرگ‌ترین فروشگاه اینترنتی ایران تبدیل شود. به محض ورود به دیجی اسمارت با یک سایت پر از کالا رو به رو می‌شوید! هر آنچه که نیاز دارید و به ذهن شما خطور می‌کند در اینجا پیدا خواهید کرد.</p>
+                                                    <h2 className="title">فروشگاه اینترنتی سرمد</h2>
+                                                    <p className="desc"> سرمد به عنوان یکی از قدیمی‌ترین فروشگاه های اینترنتی با بیش از یک دهه تجربه، با پایبندی به سه اصل کلیدی، پرداخت در محل، 7 روز ضمانت بازگشت کالا و تضمین اصل‌بودن کالا، موفق شده تا همگام با فروشگاه‌های معتبر جهان، به بزرگ‌ترین فروشگاه اینترنتی ایران تبدیل شود. به محض ورود به سرمد با یک سایت پر از کالا رو به رو می‌شوید! هر آنچه که نیاز دارید و به ذهن شما خطور می‌کند در اینجا پیدا خواهید کرد.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -212,7 +212,7 @@ class Footer extends Component {
                                         </div>
                                         <div className="footer-copyright">
                                             <div className="footer-copyright-text">
-                                                <p>تمامی مطالب، عکس ها و... متعلق به سایت فروشگاهی دیجی اسمارت می باشد.</p>
+                                                <p>تمامی مطالب، عکس ها و... متعلق به سایت فروشگاهی سرمد می باشد.</p>
                                             </div>
                                         </div>
                                     </div>

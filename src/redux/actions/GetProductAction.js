@@ -2,6 +2,7 @@
 import axios from 'axios';
 import {} from "./ActionTypes";
 import {GET_SINGLE_PRODUCT} from "./ActionTypes";
+import {GET_CLEAR_SINGLE_PRODUCT} from "./ActionTypes";
 
 export function fetchSingleProduct(slug) {
     return dispatch => {

@@ -242,7 +242,7 @@ class Gallery extends Component {
                                                         <div className="modal-body">
                                                             <div id="custom-events">
                                                                 {
-                                                                    singleProdcut.map(item => item.images.map(image =>
+                                                                    singleProdcut.map(product => product.images.map(image =>
                                                                         <a href={"http://127.0.0.1:8000/" + (image.filename)}>
                                                                             <img
                                                                                 src={"http://127.0.0.1:8000/" + (image.filename)}/>

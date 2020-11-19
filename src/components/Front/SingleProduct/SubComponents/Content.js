@@ -20,14 +20,37 @@ class Content extends Component {
 
     render() {
         const singleProdcut = this.props.singleProduct.singleProduct;
-
+        const categoryTitle = this.props.breadCrumb.breadCrumb.map(category => category.title);
+        const subcategorieTitle = this.props.breadCrumb.breadCrumb.map(category => category.subcategories.map(subcategorie => subcategorie.title));
+        let attributes = [];
+        singleProdcut.map(product => product.attributes.map((item, index) => {
+                switch (index) {
+                    case 0:
+                        attributes.push(item);
+                        break;
+                    case 1:
+                        attributes.push(item);
+                        break;
+                    case 2:
+                        attributes.push(item);
+                        break;
+                    case 3:
+                        attributes.push(item);
+                        break;
+                    case 4:
+                        attributes.push(item);
+                        break;
+                }
+            }
+        ))
         return (
+
             <div>
                 <div className="col-lg-7 col-xs-12 pl mt-5 d-block">
                     <section className="product-info">
                         <div className="product-headline">
                             <h1 className="product-title">
-                                {singleProdcut.map(item => item.title)}
+                                {singleProdcut.map(product => product.title)}
                             </h1>
                             <div className="product-guaranteed text-success">
                                 12
@@ -51,14 +74,12 @@ class Content extends Component {
                             <div className="product-directory">
                                 <ul>
                                     <li>
-                                                <span>
-                                                    <i className="fa fa-archive"></i> دسته:
-                                                </span>
-                                        <a href="#" className="product-link product-cat-title">کالای
-                                            دیجیتال</a>
+                                        <span>
+                                          <i className="fa fa-archive"></i> دسته:
+                                        </span>
+                                        <a  className="product-link product-cat-title">{categoryTitle}</a>
                                         ,
-                                        <a href="#"
-                                           className="product-link product-cat-title">موبایل</a>
+                                        <a  className="product-link product-cat-title">{subcategorieTitle}</a>
                                     </li>
                                     <li>
                                                 <span>
@@ -77,84 +98,26 @@ class Content extends Component {
                                 </ul>
                             </div>
                             <div className="col=lg-6 col-md-6 col-xs-12 pr">
-                                <div className="product-variants">
-                                    <span>رنگ بندی: </span>
-                                    <ul className="js-product-variants">
-                                        <li className="ui-variant">
-                                            <label htmlFor="#" className="ui-variant-color">
-                                                                        <span className="ui-variant-shape"
-                                                                              style={{backgroundColor: '#56abef'}}></span>
-                                                <input type="radio" value="4" name="color"
-                                                       id="variant" className="js-variant-selector"
-                                                       checked=""/>
-                                                <span className="ui-variant-check"></span>
-                                            </label>
-                                        </li>
-                                        <li className="ui-variant">
-                                            <label htmlFor="#" className="ui-variant-color">
-                                                                        <span className="ui-variant-shape"
-                                                                              style={{backgroundColor: '#a97eca'}}></span>
-                                                <input type="radio" value="4" name="color"
-                                                       id="variant"
-                                                       className="js-variant-selector"/>
-                                                <span className="ui-variant-check"></span>
-                                            </label>
-                                        </li>
-                                        <li className="ui-variant">
-                                            <label htmlFor="#" className="ui-variant-color">
-                                                                        <span className="ui-variant-shape"
-                                                                              style={{backgroundColor: '#a97eca'}}></span>
-                                                <input type="radio" value="4" name="color"
-                                                       id="variant"
-                                                       className="js-variant-selector"/>
-                                                <span className="ui-variant-check"></span>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
                                 <div className="product-params pt-3">
                                     <ul data-title="ویژگی‌های محصول">
-                                        <li>
-                                            <span>سیستم عامل: </span>
-                                            <span>Android</span>
-                                        </li>
-                                        <li>
-                                            <span>شبکه های ارتباطی: </span>
-                                            <span>2G، 3G، 4G</span>
-                                        </li>
-                                        <li>
-                                            <span>مقدار RAM: </span>
-                                            <span> 8 گیگابایت</span>
-                                        </li>
-                                        <li>
-                                            <span>ویژگی‌های خاص: </span>
-                                            <span>  مقاوم در برابر آب
-                                                        دارای بدنه مقاوم
-                                                        فبلت
-                                                        مجهز به حس‌گر اثرانگشت
-                                                        مناسب عکاسی سلفی
-                                                        مناسب بازی
-                                                        دارای قلم
-                                                    </span>
-                                        </li>
+                                        {
+                                            attributes.map(item =>
+                                                <li>
+                                                    <span>{item.attribute_keys}</span>
+                                                    <span>{item.attribute_values}</span>
+                                                </li>
+                                            )}
+
                                     </ul>
                                 </div>
-                                <div className="product-price-survey-question">
-                                    آیا قیمت مناسب‌تری سراغ دارید؟
-                                    <div className="answers">
-                                        <a href="#"
-                                           className="product-price-survery-answer price-yes btn btn-secondary">بلی</a>
-                                        <a href="#"
-                                           className="product-price-survery-answer price-no btn btn-secondary">خیر</a>
-                                    </div>
-                                </div>
+
                             </div>
                             <div className="col=lg-6 col-md-6 col-xs-12 pr">
                                 <div className="product-seller-info">
                                     <div className="seller-info-changable">
                                         <div className="product-seller-row vendor">
                                             <span className="title"> فروشنده:</span>
-                                            <a href="#" className="product-name">دیجی اسمارت</a>
+                                            <a href="#" className="product-name">سرمد</a>
                                         </div>
                                         <div className="product-seller-row guarantee">
                                             <span className="title"> گارانتی:</span>
@@ -205,7 +168,8 @@ Content.propTypes = {};
 const mapStateToProps = (state) => {
     return {
         auth: state.auth,
-        singleProduct: state.singleProduct
+        singleProduct: state.singleProduct,
+        breadCrumb: state.breadCrumb
     }
 }
 export default connect(mapStateToProps)(Content);
