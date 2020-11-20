@@ -1,10 +1,12 @@
 
 import axios from 'axios';
 import {GET_CATEGORY} from "./ActionTypes";
+import ApiUrl from "../../Config/ApiUrls";
 
 export function fetchCategory() {
     return dispatch => {
-        return axios.get('http://127.0.0.1:8000/api/category/all')
+        const url = ApiUrl.BaseServiceUrl+ApiUrl.GetAllCategoryUrl;
+        return axios.get(url)
             .then(response => {
                 dispatch(getCategory(response.data.data));
             }).catch(error => {

@@ -3,10 +3,12 @@ import axios from 'axios';
 import {} from "./ActionTypes";
 import {GET_SINGLE_PRODUCT} from "./ActionTypes";
 import {GET_CLEAR_SINGLE_PRODUCT} from "./ActionTypes";
+import ApiUrl from "../../Config/ApiUrls";
 
 export function fetchSingleProduct(slug) {
     return dispatch => {
-        return axios.post('http://127.0.0.1:8000/api/products/show/?q='+slug)
+        const url = ApiUrl.BaseServiceUrl+ApiUrl.ProductShowUrl;
+        return axios.post(url+slug)
             .then(response => {
                 dispatch(setSingleProdcut(response.data.data));
             }).catch(error => {

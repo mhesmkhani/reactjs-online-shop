@@ -5,7 +5,6 @@ import OwlCarousel from 'react-owl-carousel2';
 import ReactImageZoom from 'react-image-zoom';
 
 // import 'react-owl-carousel2/style.css'
-import $ from 'jquery';
 
 import {NavLink} from "react-router-dom";
 class Gallery extends Component {

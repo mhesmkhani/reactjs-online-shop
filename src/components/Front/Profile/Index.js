@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Profile from "./Profile";
 import SideSection from "./SubComponents/SideSection";
 import ContentSection from "./SubComponents/ContentSection";
+import Favorite from "./Sections/Favorite";
 
 class Index extends Component {
     constructor(props) {
@@ -18,42 +19,32 @@ class Index extends Component {
 
     }
 
-    componentWillReceiveProps(nextProps) {
-
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-
-    }
-
-    componentWillUpdate(nextProps, nextState) {
-
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-
-    }
-
-    componentWillUnmount() {
-
-    }
-
     render() {
+        const pathLocation = this.props.location.pathname;
+        const item = []
+        switch (pathLocation){
+            case "/profile":
+                item.push(<ContentSection/>)
+                break;
+            case "/profile/favorite":
+                item.push(<Favorite/>)
+                break;
+        }
         return (
-            <div>
+            <>
                 <div className="container-main">
                     <div className="d-block">
                         <section className="profile-home">
                             <div className="col-lg">
                                 <div className="post-item-profile order-1 d-block">
                                     <SideSection/>
-                                    <ContentSection/>
+                                    {item}
                                 </div>
                             </div>
                         </section>
                     </div>
                 </div>
-            </div>
+            </>
         );
     }
 }

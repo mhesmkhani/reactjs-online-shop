@@ -25,7 +25,6 @@ class contentSection extends Component {
     }
 
     componentDidMount() {
-
     }
 
     handleEditFullName = (data) => {

@@ -18,15 +18,16 @@ class Profile extends Component {
     }
 
     componentDidMount() {
+
     }
 
     render() {
         return (
-            <div>
+            <>
                 <Header/>
-                <Index/>
+                <Index location={this.props.location}/>
                 <Footer/>
-            </div>
+            </>
         );
     }
 }

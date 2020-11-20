@@ -1,10 +1,12 @@
 
 import axios from 'axios';
 import {GET_CLEAR_SINGLE_PRODUCT, GET_SEARCH_PRODUCT} from "./ActionTypes";
+import ApiUrl from "../../Config/ApiUrls";
 
 export function fetchSearch(search) {
     return dispatch => {
-        return axios.post('http://127.0.0.1:8000/api/category/search/?q='+search)
+        const url = ApiUrl.BaseServiceUrl+ApiUrl.CategorySearchUrl;
+        return axios.post(url+search)
             .then(response => {
                 dispatch(setSearchData(response.data.data));
             }).catch(error => {

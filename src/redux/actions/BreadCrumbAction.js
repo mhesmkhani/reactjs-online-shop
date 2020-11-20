@@ -1,11 +1,13 @@
 
 import axios from 'axios';
 import {GET_BREAD_CRUMB} from "./ActionTypes";
+import ApiUrl from "../../Config/ApiUrls";
 
-export function getBreadCrumb($id) {
+export function getBreadCrumb(id) {
     return dispatch => {
         let data = []
-        return axios.post('http://127.0.0.1:8000/api/category/breadcrumb?id='+$id)
+        const url = ApiUrl.BaseServiceUrl+ApiUrl.CategoryBreadCrumbUrl;
+        return axios.post(url+id)
             .then(response => {
                 data = response.data.data;
                 dispatch(setBreadCrumb(response.data.data));

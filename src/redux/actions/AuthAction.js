@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import {GET_API_TOKEN, USER_LOGIN} from "./ActionTypes";
-
+import ApiUrl from '../../Config/ApiUrls'
 export const ExpireToken = (config,callback) => {
         let message = '';
 }
@@ -15,7 +15,7 @@ export const SetApiToken = (token) => {
 export const ReceiveCode = (data,callback) => {
     return dispatch => {
         let message = '';
-        const url = 'http://127.0.0.1:8000/api/user/register';
+        const url = ApiUrl.BaseServiceUrl+ApiUrl.UserRegisterUrl;
         return axios.post(url, data).then(response => {
             dispatch(getApiToken(response.data.api_token));
             message = response.data.message;
@@ -37,7 +37,7 @@ const getApiToken = (apiToken) => {
 export const VerifyCode = (data,config,callback) => {
     return dispatch => {
         let message = '';
-        const url = 'http://127.0.0.1:8000/api/user/verifyAccount';
+        const url = ApiUrl.BaseServiceUrl+ApiUrl.VerifyAccountUrl;
         return axios.post(url, data,config).then(response => {
             message = response.data.message;
             callback(message);
@@ -52,7 +52,7 @@ export const VerifyCode = (data,config,callback) => {
 export const CreatePassword = (data,config,callback) => {
     return dispatch => {
         let message = '';
-        const url = 'http://127.0.0.1:8000/api/user/makePassword';
+        const url = ApiUrl.BaseServiceUrl+ApiUrl.MakePasswordUrl;
         return axios.post(url, data,config).then(response => {
             message = response.data.message;
             callback(message);
@@ -68,7 +68,7 @@ export const UserLogin = (data,callback) => {
     return dispatch => {
         let message = '';
         let apiToken = '';
-        const url = 'http://127.0.0.1:8000/api/user/login';
+        const url = ApiUrl.BaseServiceUrl+ApiUrl.UserLoginUrl;
         return axios.post(url, data).then(response => {
             dispatch(loginSuccess(response.data));
             message = 'success';

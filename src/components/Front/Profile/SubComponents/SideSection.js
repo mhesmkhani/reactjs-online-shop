@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
+import {NavLink} from "react-router-dom";
 
 class SideSection extends Component {
     constructor(props) {
@@ -56,37 +57,37 @@ class SideSection extends Component {
                         <section className="profile-box">
                             <ul className="profile-account-navs">
                                 <li className="profile-account-nav-item navigation-link-dashboard">
-                                    <a href="#" className="active"><i
-                                        className="mdi mdi-account-outline"></i>
+                                    <NavLink exact to={"/profile"} activeClassName="active">
+                                        <i className="mdi mdi-account-outline"></i>
                                         پروفایل
-                                    </a>
+                                    </NavLink>
                                 </li>
                                 <li className="profile-account-nav-item navigation-link-dashboard">
-                                    <a href="#" className=""><i className="mdi mdi-cart"></i>
+                                    <NavLink to={"/profile/orders"} activeClassName="active"><i className="mdi mdi-cart"></i>
                                         همه سفارش ها
-                                    </a>
+                                    </NavLink>
                                 </li>
                                 <li className="profile-account-nav-item navigation-link-dashboard">
-                                    <a href="#" className=""><i className="mdi mdi-heart"></i>
+                                    <NavLink to={'/profile/favorite'} activeClassName="active"><i className="mdi mdi-heart"></i>
                                         لیست علاقه مندی
-                                    </a>
+                                    </NavLink>
                                 </li>
                                 <li className="profile-account-nav-item navigation-link-dashboard">
-                                    <a href="#" className=""><i className="mdi mdi-map-outline"></i>
+                                    <NavLink to={"/profile/address"} activeClassName="active"><i className="mdi mdi-map-outline"></i>
                                         آدرس ها
-                                    </a>
+                                    </NavLink>
                                 </li>
                                 <li className="profile-account-nav-item navigation-link-dashboard">
-                                    <a href="#" className=""><i
+                                    <NavLink to={"/profile/comments"} activeClassName="active"><i
                                         className="mdi mdi-email-open-outline"></i>
                                         نظرات
-                                    </a>
+                                    </NavLink>
                                 </li>
                                 <li className="profile-account-nav-item navigation-link-dashboard">
-                                    <a href="#" className=""><i
+                                    <NavLink to={"/profile/information"} activeClassName="active"><i
                                         className="mdi mdi-tooltip-text-outline"></i>
                                         اطلاعات حساب
-                                    </a>
+                                    </NavLink>
                                 </li>
                             </ul>
                         </section>
