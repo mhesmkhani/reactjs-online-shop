@@ -3,10 +3,10 @@ import axios from 'axios';
 import {GET_USER_FAVORITE} from "./ActionTypes";
 import ApiUrl from "../../Config/ApiUrls";
 
-export function fetchFavorite(id) {
+export function fetchFavorite(config) {
     return dispatch => {
-        const url = ApiUrl.BaseServiceUrl+ApiUrl.UserFavoriteUrl;
-        return axios.post(url+id)
+        const url = ApiUrl.BaseServiceUrl+ApiUrl.GetUserFavoriteUrl;
+        return axios.get(url,config)
             .then(response => {
                 dispatch(setFavoriteList(response.data.data));
             }).catch(error => {
@@ -22,6 +22,34 @@ const setFavoriteList = (favorite) => {
     }
 }
 
+export const storeFavorite  = (data,config) => {
+    return dispatch => {
+        let message = '';
+        const url = ApiUrl.BaseServiceUrl+ApiUrl.SetUserFavoriteUrl;
+        return axios.post(url,data,config).then(response => {
+           message = response.data.message;
+           return message
+        }).catch(error => {
+            message = error
+            throw(error)
+        })
+    }
+}
+
+
+export const deleteFavorite  = (data,config) => {
+    return dispatch => {
+        let message = '';
+        const url = ApiUrl.BaseServiceUrl+ApiUrl.DeleteUserFavoriteUrl;
+        return axios.post(url,data,config).then(response => {
+            message = response.data.message;
+            return message
+        }).catch(error => {
+            message = error
+            throw(error)
+        })
+    }
+}
 
 
 

@@ -16,6 +16,7 @@ import Uploader from "./components/Back/Uploader";
 import Archive from "./components/Front/Archive/Archive";
 import SingleProduct from "./components/Front/SingleProduct/SingleProduct";
 import Favorite from "./components/Front/Profile/Sections/Favorite";
+import Checkout from "./components/Front/Checkout/Checkout";
 
 function App() {
     return (
@@ -28,12 +29,13 @@ function App() {
                     <Route path="/cart" component={Test}/>
                     <Route path="/login" component={Login}/>
                     <Route path="/receive-code" component={ReceiveCode}/>
-                    <Route path="/verify-code" component={VerifyCode}/>
-                    <Route path="/create-password" component={CreatePassword}/>
+                    <PrivateRoute path="/verify-code" component={VerifyCode}/>
+                    <PrivateRoute path="/create-password" component={CreatePassword}/>
                     <Route path="/category/search" component={Archive}/>
                     <Route path="/product" component={SingleProduct}/>
-                    <Route path="/upload" component={Uploader}/>
+                    <PrivateRoute path="/upload" component={Uploader}/>
                     <PrivateRoute path="/profile" component={Profile}/>
+                    <PrivateRoute path="/user/checkout" component={Checkout}/>
                     {/*<Route  path="/profile/favorite" component={Favorite}/>*/}
                 </Switch>
             </Router>

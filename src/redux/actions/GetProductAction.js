@@ -30,4 +30,10 @@ export function getSingleProductData(value) {
     }
 }
 
+export function setClearSingleProduct(clearSingleProduct) {
+    return {
+        type: GET_CLEAR_SINGLE_PRODUCT,
+        clearSingleProduct,
+    }
+}
 

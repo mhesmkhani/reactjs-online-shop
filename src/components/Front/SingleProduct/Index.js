@@ -24,7 +24,6 @@ class Index extends Component {
 
     render() {
         const singleProduct = this.props.singleProduct.singleProduct.length
-         console.log(this.props.singleProduct.singleProduct.length)
         return (
             <>
                 {

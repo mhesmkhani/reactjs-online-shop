@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
+import Icon from "../../../../Config/GlobaliCons";
 
 class SideSection extends Component {
     constructor(props) {
@@ -29,7 +30,7 @@ class SideSection extends Component {
                         <section className="profile-box">
                             <header className="profile-box-header-inline">
                                 <div className="profile-avatar user-avatar profile-img">
-                                    <img src="assets/images/man.png"/>
+                                    <img src={Icon.Man}/>
                                 </div>
                             </header>
                             <footer className="profile-box-content-footer">
@@ -49,7 +50,7 @@ class SideSection extends Component {
 
                                 }
                                 <div className="profile-box-tabs">
-                                    <a onClick={this.handleLogout} href="#" className="profile-box-tab-sign-out"><i
+                                    <a onClick={this.handleLogout} className="cursor-pointer profile-box-tab-sign-out"><i
                                         className="mdi mdi-logout-variant"></i>خروج از حساب</a>
                                 </div>
                             </footer>
@@ -73,8 +74,8 @@ class SideSection extends Component {
                                     </NavLink>
                                 </li>
                                 <li className="profile-account-nav-item navigation-link-dashboard">
-                                    <NavLink to={"/profile/address"} activeClassName="active"><i className="mdi mdi-map-outline"></i>
-                                        آدرس ها
+                                    <NavLink to={"/profile/cart"} activeClassName="active"><i className="mdi mdi-map-outline"></i>
+                                         سبد خرید
                                     </NavLink>
                                 </li>
                                 <li className="profile-account-nav-item navigation-link-dashboard">

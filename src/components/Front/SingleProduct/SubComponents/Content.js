@@ -1,16 +1,28 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
+import {deleteFavorite, fetchFavorite, storeFavorite} from "../../../../redux/actions/FavoriteAction";
+import {fetchCarts, storeCart} from "../../../../redux/actions/CartAction";
 
 class Content extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            quantity: 1
+        }
 
     }
-
-
+    onChange = (e) => {
+        this.setState({[e.target.name]: e.target.value})
+    }
     componentDidMount() {
-
+        const apiToken = this.props.auth.apiToken
+        if (apiToken.length > 0) {
+            const config = {
+                headers: {'Authorization': this.props.auth.apiToken}
+            }
+            this.props.getUserCart(config);
+        }
     }
 
 
@@ -18,12 +30,52 @@ class Content extends Component {
 
     }
 
+    sumQuantity = () => {
+        this.setState({
+            quantity: this.state.quantity += 1
+        })
+    }
+    minusQuantity = () => {
+        if(this.state.quantity <= 1){
+            this.setState({
+                quantity: 1
+            })
+        }else {
+            this.setState({
+                quantity: this.state.quantity -= 1
+            })
+        }
+    }
+
+    handleAddCart = (id) => {
+        const productID = id[0];
+        const config = {
+            headers: {'Authorization': this.props.auth.apiToken}
+        }
+        const data = {
+            product_id: productID,
+            quantity: this.state.quantity
+       }
+        this.props.onClickToAddCart(data,config)
+        this.componentDidMount();
+    }
     render() {
         const singleProdcut = this.props.singleProduct.singleProduct;
         const categoryTitle = this.props.breadCrumb.breadCrumb.map(category => category.title);
         const subcategorieTitle = this.props.breadCrumb.breadCrumb.map(category => category.subcategories.map(subcategorie => subcategorie.title));
+        const {cart} = this.props;
+        const cartData = cart.cart;
         let attributes = [];
-        singleProdcut.map(product => product.attributes.map((item, index) => {
+        let isCart = false;
+        singleProdcut.map((product,index) => {
+            cartData.reduce((fav, el) => {
+                if (el.id !== null && product.id === el.id) {
+                    isCart = true
+                }
+                return fav;
+            }, [])
+        })
+         singleProdcut.map(product => product.attributes.map((item, index) => {
                 switch (index) {
                     case 0:
                         attributes.push(item);
@@ -121,37 +173,47 @@ class Content extends Component {
                                         </div>
                                         <div className="product-seller-row guarantee">
                                             <span className="title"> گارانتی:</span>
-                                            <a href="#" className="product-name">۱۸ ماهه دیجی
-                                                اسمارت</a>
+                                            <a href="#" className="product-name">
+                                                گارانتی اصالت و سلامت فیزیکی کالا
+                                            </a>
+
                                         </div>
                                         <div className="product-seller-row price">
                                             <span className="title"> قیمت:</span>
                                             <a href="#" className="product-name">
                                                         <span className="amount">
-                                                            14,350,000
-                                                            <span>تومان</span>
+                                                     {singleProdcut.map(product => product.price.replace(/\B(?=(\d{3})+(?!\d))/g, ","))}
+                                                       <span className="mx-1">تومان</span>
                                                         </span>
                                             </a>
                                         </div>
                                         <div className="product-seller-row guarantee">
                                             <span className="title mt-3"> تعداد:</span>
                                             <div className="quantity pl">
-                                                <input type="number" min="1" max="100" step="1"
-                                                       value="1"/>
+                                                <input type="number"
+                                                       min="1"
+                                                       max="100"
+                                                       step="1"
+                                                       name={"quantity"}
+                                                       onChange={this.onChange}
+                                                       value={this.state.quantity}/>
                                                 <div className="quantity-nav">
-                                                    <div
-                                                        className="quantity-button quantity-up">+
-                                                    </div>
-                                                    <div
-                                                        className="quantity-button quantity-down">-
-                                                    </div>
+                                                    <div onClick={this.sumQuantity} className="quantity-button quantity-up"> + </div>
+                                                    <div onClick={this.minusQuantity} className="quantity-button quantity-down" aria-disabled={true}> - </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="product-seller-row add-to-cart">
-                                            <a href="#" className="btn-add-to-cart btn btn-primary">
-                                                <span className="btn-add-to-cart-txt">افزودن به سبد خرید</span>
-                                            </a>
+                                            {
+                                                isCart === true ?
+                                                    <a onClick={() => alert("getCheckout")}  className="text-white btn-add-to-cart btn btn-primary">
+                                                        <span className="btn-remove-to-cart-txt"> ادامه فرایند خرید </span>
+                                                    </a>
+                                                    :
+                                                    <a onClick={() => this.handleAddCart(singleProdcut.map(product => product.id))}  className="text-white btn-add-to-cart btn btn-primary">
+                                                        <span className="btn-add-to-cart-txt">افزودن به سبد خرید</span>
+                                                    </a>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -169,7 +231,19 @@ const mapStateToProps = (state) => {
     return {
         auth: state.auth,
         singleProduct: state.singleProduct,
-        breadCrumb: state.breadCrumb
+        breadCrumb: state.breadCrumb,
+        cart: state.cart
     }
 }
-export default connect(mapStateToProps)(Content);
+const mapDispatchToProps = dispatch => {
+    return {
+        onClickToAddCart: (producId,config) => {
+            dispatch(storeCart(producId,config))
+        },
+        getUserCart: config => {
+            dispatch(fetchCarts(config))
+        },
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Content);

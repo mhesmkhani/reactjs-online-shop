@@ -5,6 +5,7 @@ import validator from "validator";
 import {connect} from "react-redux";
 import * as action from '../../../../redux/actions/AuthAction'
 import Modal from "react-bootstrap/Modal";
+import Icon from "../../../../Config/GlobaliCons";
 
 class CreatePassword extends Component {
     constructor(props) {
@@ -14,7 +15,7 @@ class CreatePassword extends Component {
             password: '',
             confirm_password: '',
             errors: {},
-            show: false
+            show: true
         }
     }
 
@@ -92,22 +93,28 @@ class CreatePassword extends Component {
          return (
             <>
                 <Modal show={this.state.show} onHide={this.handleClose} dir="rtl">
-                    <Modal.Header  className="primary-bg m-0 d-flex justify-content-center">
-                        <Modal.Title className="text-light d-flex align-items-center">
-                            <i className="mdi mdi-check-decagram mx-1"></i>
-                            <h6 >ثبت نام با موفقیت انجام شد</h6>
-                        </Modal.Title>
-                    </Modal.Header>
                     <Modal.Body className="d-flex justify-content-center">
-                        <span style={{fontSize: 'small',fontWeight:500}}> برای استفاده از خدمات فروشگاه لطفا وارد حساب کاربری خود شوید</span>
-                    </Modal.Body>
-                    <Modal.Footer className="account-box-content p-2">
-                        <div className="form-row-account col-12">
-                            <button onClick={this.handleRedirect} className="btn btn-primary btn-login">
-                                ورود به حساب
-                            </button>
+                        <div className="Login-to-account mt-4">
+                            <div className="account-box-content">
+                                <h4 className="mb-2 text-center">ثبت نام با موفقیت انجام شد</h4>
+                                <form action="#" className="form-account text-center">
+                                    <div className="user-account-welcome">
+                                        <img src={Icon.Man}/>
+                                    </div>
+                                    <div className="made-account">
+                                        <h2>حساب کاربری شما در سرمد ساخته شد</h2>
+                                        <p>اکنون می‌توانید به صفحه‌ای که در آن بودید بازگردید و یا با تکمیل اطلاعات حساب
+                                            کاربری
+                                            خود به کلیه امکانات و
+                                            سرویس‌های سرمد و سرویس‌های وابسته به آن دسترسی داشته باشید</p>
+                                    </div>
+                                    <div className="form-row-account">
+                                        <button className="btn btn-primary btn-login" onClick={this.handleRedirect}>ورود به حساب کاربری</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </Modal.Footer>
+                    </Modal.Body>
                 </Modal>
 
                 <div className="container">

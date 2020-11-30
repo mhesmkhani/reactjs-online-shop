@@ -8,7 +8,6 @@ const FavoriteReducer = (state = INIT_STATE,action) => {
     switch(action.type){
         case GET_USER_FAVORITE:
             return {...state,favorite:action.favorite};
-
         default:
             return state;
 

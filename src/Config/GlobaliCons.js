@@ -5,6 +5,8 @@ import DeliveryRef from './images/page-single-product/delivery.svg'
 import OriginGuaranteeRef from './images/page-single-product/origin-guarantee.svg'
 import PaymentTermsRef from './images/page-single-product/payment-terms.svg'
 import ReturnPolicyRef from './images/page-single-product/return-policy.svg'
+import CertEmptyRef from './images/shopping-cart.png'
+import HeartEmptyRef from './images/heart.svg'
 
 const Icon = {
     Logo: LogoRefrence,
@@ -13,7 +15,9 @@ const Icon = {
     Delivery: DeliveryRef,
     OriginGuarantee: OriginGuaranteeRef,
     PaymentTerms: PaymentTermsRef,
-    ReturnPolicy: ReturnPolicyRef
+    ReturnPolicy: ReturnPolicyRef,
+    CertEmptyRef: CertEmptyRef,
+    HeartEmpty: HeartEmptyRef
 }
 
 export default Icon;

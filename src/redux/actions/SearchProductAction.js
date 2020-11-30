@@ -27,12 +27,7 @@ export function getsearchValue(value) {
          this.fetchSearch(value)
     }
 }
-export function setClearSingleProduct(clearSingleProduct) {
-    return {
-        type: GET_CLEAR_SINGLE_PRODUCT,
-        clearSingleProduct,
-    }
-}
+
 
 // const setSearchValue = (searchValue) => {
 //     return {

@@ -5,6 +5,8 @@ import SearchReducer from "./SearchReducer";
 import SingleProductReducer from "./SingleProductReducer";
 import BreadCrumbReducer from "./BreadCrumbReducer";
 import FavoriteReducer from "./FavoriteReducer";
+import CartReducer from "./CartReducer";
+import ProvincesReducer from "./ProvincesReducer";
 
 export default combineReducers({
     category: CategoryReducer,
@@ -12,5 +14,7 @@ export default combineReducers({
     search: SearchReducer,
     singleProduct: SingleProductReducer,
     breadCrumb:BreadCrumbReducer,
-    favorite:FavoriteReducer
+    favorite:FavoriteReducer,
+    cart:CartReducer,
+    provinces: ProvincesReducer,
 })

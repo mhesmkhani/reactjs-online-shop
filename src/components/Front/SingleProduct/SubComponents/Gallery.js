@@ -7,6 +7,8 @@ import ReactImageZoom from 'react-image-zoom';
 // import 'react-owl-carousel2/style.css'
 
 import {NavLink} from "react-router-dom";
+import {fetchSingleProduct} from "../../../../redux/actions/GetProductAction";
+import {deleteFavorite, fetchFavorite, storeFavorite} from "../../../../redux/actions/FavoriteAction";
 class Gallery extends Component {
     constructor(props) {
         super(props);
@@ -20,16 +22,58 @@ class Gallery extends Component {
 
     }
     componentDidMount() {
+        const apiToken = this.props.auth.apiToken
+        if (apiToken.length > 0) {
+            const config = {
+                headers: {'Authorization': this.props.auth.apiToken}
+            }
+            this.props.getUserFavorite(config)
+        }
+
     }
     handleSetImage = (data) => {
-        console.log(data)
        this.setState({
            mainImage: data
        })
     }
+    handleAddFavortie = (id) => {
+        const productID = id[0];
+        const config = {
+            headers: {'Authorization': this.props.auth.apiToken}
+        }
+        const data = {
+            product_id: productID,
+        }
+        this.props.onClickToAddFavorite(data,config)
+        this.componentDidMount();
+    }
+    handleRemoveFavorite = (id) => {
+        const productID = id[0];
+        const config = {
+            headers: {'Authorization': this.props.auth.apiToken}
+        }
+        const data = {
+            product_id: productID,
+        }
+        this.props.onClickToRemoveFavorite(data,config)
+        this.componentDidMount();
+    }
     render() {
         const {mainImage} = this.state;
         const singleProdcut = this.props.singleProduct.singleProduct;
+        const {favorite} = this.props;
+        const favoriteData = favorite.favorite;
+        let isFavorite = false;
+
+        singleProdcut.map((product,index) => {
+                    favoriteData.reduce((fav, el) => {
+                    if (el.id !== null && product.id === el.id) {
+                        isFavorite = true
+                    }
+                    return fav;
+                }, [])
+        })
+
         const options = {
             rtl: true,
             loop: false,
@@ -52,12 +96,27 @@ class Gallery extends Component {
                             <div className="gallery-item">
                                 <div>
                                     <ul className="gallery-actions">
-                                        <li className="mx-1">
-                                            <a href="#" className="btn-option add-product-wishes">
-                                                <i className="mdi mdi-heart-outline"></i>
-                                                <span>محبوب</span>
-                                            </a>
-                                        </li>
+                                        {
+                                            isFavorite === true ?
+                                                <li className="mx-1">
+                                                    < a onClick={() => this.handleRemoveFavorite(singleProdcut.map(item => item.id))} className="btn-option btn-isFavorite add-product-wishes cursor-pointer">
+                                                        <i className="mdi mdi-heart"></i>
+                                                        <span>
+                                                       <span>محبوب</span>
+                                                </span>
+                                                    </a>
+                                                </li>
+                                                :
+                                                <li className="mx-1">
+                                                    < a onClick={() => this.handleAddFavortie(singleProdcut.map(item => item.id))} className="btn-option add-product-wishes cursor-pointer">
+                                                        <i className="mdi mdi-heart-outline"></i>
+                                                        <span>
+                                                       <span>محبوب</span>
+                                                </span>
+                                                    </a>
+                                                </li>
+                                        }
+
                                         <li className="mx-1 option-social">
                                             <a href="#" className="btn-option btn-option-social"
                                                data-toggle="modal" data-target="#option-social">
@@ -243,8 +302,7 @@ class Gallery extends Component {
                                                                 {
                                                                     singleProdcut.map(product => product.images.map(image =>
                                                                         <a href={"http://127.0.0.1:8000/" + (image.filename)}>
-                                                                            <img
-                                                                                src={"http://127.0.0.1:8000/" + (image.filename)}/>
+                                                                            <img  src={"http://127.0.0.1:8000/" + (image.filename)}/>
                                                                         </a>
                                                                     ))}
 
@@ -303,7 +361,22 @@ Gallery.propTypes = {};
 const mapStateToProps = (state) => {
     return {
         auth: state.auth,
-        singleProduct: state.singleProduct
+        singleProduct: state.singleProduct,
+        favorite: state.favorite
     }
 }
-export default connect(mapStateToProps)(Gallery);
+const mapDispatchToProps = dispatch => {
+    return {
+        onClickToAddFavorite: (producId,config) => {
+            dispatch(storeFavorite(producId,config))
+        },
+        onClickToRemoveFavorite: (producId,config) => {
+            dispatch(deleteFavorite(producId,config))
+        },
+        getUserFavorite: config => {
+            dispatch(fetchFavorite(config))
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Gallery);

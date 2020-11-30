@@ -4,6 +4,10 @@ import CartBasket from "./CartBasket";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import * as action from '../../../../redux/actions/SearchProductAction'
+import {fetchSingleProduct, setClearSingleProduct} from "../../../../redux/actions/GetProductAction";
+import {fetchFavorite} from "../../../../redux/actions/FavoriteAction";
+import {getsearchValue} from "../../../../redux/actions/SearchProductAction";
+import {fetchSearch} from "../../../../redux/actions/SearchProductAction";
 
 class Category extends Component {
     constructor(props) {
@@ -17,13 +21,22 @@ class Category extends Component {
     }
     handleGetSearch = (data) => {
         const value = {}
-        this.props.getsearchValue(data)
-        this.props.setClearSingleProduct(value)
+        this.props.search(data)
+        this.props.getclearSingleProduct(value)
     }
 
     render() {
         const {category} = this.props;
         const categoryData = category.category;
+        const userInfo = this.props.auth.userInfo.data;
+        let apiToken = ''
+        if (this.props.auth.apiToken.length < 1) {
+            apiToken = null
+        } else {
+            apiToken = this.props.auth.apiToken
+        }
+        const isAuthenticated = apiToken
+
         return (
             <>
                 <nav className="header-main-nav">
@@ -64,7 +77,11 @@ class Category extends Component {
 
                                         </li>
                                     )}
-                                <CartBasket/>
+                                {
+
+                                    <CartBasket/>
+
+                                }
                             </ul>
                         </div>
                     </div>
@@ -78,6 +95,18 @@ Category.propTypes = {};
 const mapStateToProps = (state) => {
     return {
         category: state.category,
+        auth: state.auth
     }
 }
-export default connect(mapStateToProps,action)(Category);
+const mapDispatchToProps = dispatch => {
+    return {
+        search: slug => {
+            dispatch(fetchSearch(slug))
+        },
+        getclearSingleProduct: id => {
+            dispatch(setClearSingleProduct(id))
+        }
+    }
+
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Category);

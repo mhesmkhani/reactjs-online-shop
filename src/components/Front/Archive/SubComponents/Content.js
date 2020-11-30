@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
 import * as action from '../../../../redux/actions/GetProductAction'
+import ApiUrl from "../../../../Config/ApiUrls";
 
 class Sidebar extends Component {
     constructor(props) {
@@ -94,7 +95,7 @@ class Sidebar extends Component {
                                                                     <span>20%</span>
                                                                 </div>
                                                                 {
-                                                                    <img src={"http://127.0.0.1:8000/" + (productData.images[0].filename)}/>
+                                                                    <img src={ApiUrl.BaseUrl + (productData.images[0].filename)}/>
                                                                 }
                                                             </div>
                                                         </div>
@@ -103,8 +104,8 @@ class Sidebar extends Component {
                                                         </div>
                                                         <div className="price">
                                                     <span className="amount">
-                                                        {productData.price}
-                                                        <span>تومان</span>
+                                                        {productData.price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                                        <span className="mx-1">تومان</span>
                                                     </span>
                                                         </div>
                                                     </section>
