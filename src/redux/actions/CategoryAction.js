@@ -2,13 +2,16 @@
 import axios from 'axios';
 import {GET_CATEGORY} from "./ActionTypes";
 import ApiUrl from "../../Config/ApiUrls";
+import httpService from "../../Config/Http.service";
 
 export function fetchCategory() {
     return dispatch => {
-        const url = ApiUrl.BaseServiceUrl+ApiUrl.GetAllCategoryUrl;
-        return axios.get(url)
+        const url = ApiUrl.GetAllCategoryUrl;
+        return httpService.httpGet(url)
             .then(response => {
-                dispatch(getCategory(response.data.data));
+                if(response !== undefined){
+                    dispatch(getCategory(response.data.data));
+                }
             }).catch(error => {
                 throw(error);
             });

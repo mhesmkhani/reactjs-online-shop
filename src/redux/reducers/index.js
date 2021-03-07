@@ -7,6 +7,9 @@ import BreadCrumbReducer from "./BreadCrumbReducer";
 import FavoriteReducer from "./FavoriteReducer";
 import CartReducer from "./CartReducer";
 import ProvincesReducer from "./ProvincesReducer";
+import OrderReducer from "./OrderReducer";
+import ErrorReducer from "./ErrorReducer";
+
 
 export default combineReducers({
     category: CategoryReducer,
@@ -17,4 +20,7 @@ export default combineReducers({
     favorite:FavoriteReducer,
     cart:CartReducer,
     provinces: ProvincesReducer,
+    orders: OrderReducer,
+    error: ErrorReducer
+
 })

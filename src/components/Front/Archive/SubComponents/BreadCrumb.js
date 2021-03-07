@@ -17,7 +17,7 @@ class BreadCrumb extends Component {
 
     render() {
         return (
-            <div>
+            <React.Fragment>
                 <div id="breadcrumb">
                     <i className="mdi mdi-home"></i>
                     <nav aria-label="breadcrumb">
@@ -28,7 +28,7 @@ class BreadCrumb extends Component {
                         </ol>
                     </nav>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }

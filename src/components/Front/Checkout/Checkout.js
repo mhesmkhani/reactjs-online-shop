@@ -20,11 +20,11 @@ class Checkout extends Component {
 
     render() {
         return (
-            <>
+            <React.Fragment>
                 <Header/>
                 <Index/>
                 <Footer/>
-            </>
+            </React.Fragment>
         );
     }
 }

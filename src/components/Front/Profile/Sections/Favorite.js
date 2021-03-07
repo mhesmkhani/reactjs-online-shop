@@ -14,8 +14,8 @@ class Favorite extends Component {
 
     }
 
-
     componentDidMount() {
+        document.title = "لیست علاقه مندی ها"
         const config = {
             headers: {'Authorization': this.props.auth.apiToken}
         }
@@ -32,13 +32,20 @@ class Favorite extends Component {
             product_id: id,
         }
         this.props.onClickToRemoveFavorite(data,config)
-        this.componentDidMount();
+        setTimeout(
+            function() {
+                this.componentDidMount();
+            }
+                .bind(this),
+            100
+        )
     }
     render() {
         const {favorite} = this.props;
         const favoriteData = favorite.favorite;
          return (
-            <>
+            <React.Fragment>
+
                 <div className="col-lg-9 col-md-9 col-xs-12 pl">
                     <div className="profile-content content-page">
                         <div className="profile-stats">
@@ -127,7 +134,7 @@ class Favorite extends Component {
                                                     <div
                                                         className="cart-empty text-center ">
                                                         <div className="cart-empty-img mb-4 mt-4">
-                                                            <img src={Icon.HeartEmpty} width={120}/>
+                                                            <img src={Icon.ShoppingCartEmpty} width={200}/>
                                                         </div>
                                                         <p className="cart-empty-title">
                                                           لیست علاقه مندی شما خالی است
@@ -141,7 +148,7 @@ class Favorite extends Component {
                         </div>
                     </div>
                 </div>
-            </>
+            </React.Fragment>
 
 
         );
@@ -152,7 +159,7 @@ Favorite.propTypes = {};
 const mapStateToProps = (state) => {
     return {
         auth: state.auth,
-        favorite: state.favorite
+        favorite: state.favorite,
     }
 }
 const mapDispatchToProps = dispatch => {
@@ -161,11 +168,14 @@ const mapDispatchToProps = dispatch => {
             dispatch(fetchSingleProduct(slug))
         },
         onClickToRemoveFavorite: (producId,config) => {
-            dispatch(deleteFavorite(producId,config))
+            dispatch(deleteFavorite(producId,config, callback => {
+                console.log(callback)
+            }))
         },
         getUserFavorite: config => {
             dispatch(fetchFavorite(config))
-        }
+        },
+
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Favorite);

@@ -1,8 +1,17 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import Modal from "react-bootstrap/Modal";
-
+import {fetchSearch} from "../../../../redux/actions/SearchProductAction";
+import {setClearSingleProduct} from "../../../../redux/actions/GetProductAction";
+import {
+    updateEmail,
+    updateFullname,
+    updateHomePhone,
+    updateNationalCode,
+    updatePhone
+} from "../../../../redux/actions/UserAction";
+import {loginSuccess} from "../../../../redux/actions/AuthAction";
 class contentSection extends Component {
     constructor(props) {
         super(props);
@@ -25,8 +34,61 @@ class contentSection extends Component {
     }
 
     componentDidMount() {
+        const userInfo = this.props.auth.userInfo;
+        let fullname = ''
+        if(userInfo.fullname){
+            fullname = userInfo.fullname
+        }else{
+            fullname = 'کاربرسرمد'
+        }
+        document.title = "حساب کاربری | " + fullname
     }
 
+    handleUpdateFullname = () => {
+        const data = {
+            fullname: this.state.fullname,
+        }
+        const config = {
+            headers: {'Authorization': this.props.auth.apiToken}
+        }
+        this.props.getToUpdateFullname(data,config)
+    }
+    handleUpdatePhone = () => {
+        const data = {
+            phone: this.state.phone,
+        }
+        const config = {
+            headers: {'Authorization': this.props.auth.apiToken}
+        }
+        this.props.getToUpdatePhone(data,config)
+    }
+    handleUpdateHomePhone = () => {
+        const data = {
+            home_phone: this.state.home_phone,
+        }
+        const config = {
+            headers: {'Authorization': this.props.auth.apiToken}
+        }
+        this.props.getToUpdateHomePhone(data,config)
+    }
+    handleUpdateEmail = () => {
+        const data = {
+            email: this.state.email,
+        }
+        const config = {
+            headers: {'Authorization': this.props.auth.apiToken}
+        }
+        this.props.getToUpdateEmail(data,config)
+    }
+    handleUpdateNationalCode= () => {
+        const data = {
+            national_code: this.state.national_code,
+        }
+        const config = {
+            headers: {'Authorization': this.props.auth.apiToken}
+        }
+        this.props.getToUpdateNationalCode(data,config)
+    }
     handleEditFullName = (data) => {
         this.setState({
             fullname: data,
@@ -66,11 +128,19 @@ class contentSection extends Component {
             nationalCodeModal: false
         })
     }
+    handleClsInput = () => {
+        this.setState({
+            fullname:'',
+            email:'',
+            phone:'',
+            home_phone: '',
+            national_code: '',
+        })
+    }
     render() {
-        const userInfo = this.props.auth.userInfo.data;
-        return (
-
-            <>
+        const userInfo = this.props.auth.userInfo;
+         return (
+            <React.Fragment>
                 <Modal show={this.state.fullnameModal} onHide={this.handleClose} dir="rtl">
                     <Modal.Header  className="primary-bg m-0 d-flex justify-content-center">
                         <Modal.Title className="text-light d-flex align-items-center">
@@ -79,11 +149,13 @@ class contentSection extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="d-flex justify-content-center">
+
                         <div className="account-box-content col-12">
                             <div className="form-account-title">
                                 <label htmlFor="fullname">نام و نام خانوادگی</label>
                                 {/*<span className="invalid-feedback rtl m-0" style={{ display: errors["password"] ? 'block' : 'none' }}>{errors["password"]}</span>*/}
                                 <input type="text"
+                                       onClick={this.handleClsInput}
                                        id="fullname"
                                        className="number-email-input text-right my-2"
                                        name="fullname"
@@ -91,12 +163,16 @@ class contentSection extends Component {
                                        value={this.state.fullname}
                                 />
                             </div>
+
                         </div>
                     </Modal.Body>
                     <Modal.Footer className="account-box-content p-2">
-                        <div className="form-row-account col-12">
-                            <button onClick={this.handleRedirect} className={"btn " + (this.state.fullname.length > 2 ?  "btn-login"  : "disable-btn")} disabled={this.state.fullname.length > 2 ? false : true}>
+                        <div className="d-flex form-row-account col-12">
+                            <button onClick={this.handleUpdateFullname} className={"mx-1 col btn " + (this.state.fullname.length > 2 ?  "btn-login"  : "disable-btn")} disabled={this.state.fullname.length > 2 ? false : true}>
                                 ثبت تغیرات
+                            </button>
+                            <button onClick={this.handleClose} className={"mx-1 col btn btn-dark"} >
+                                بازگشت
                             </button>
                         </div>
                     </Modal.Footer>
@@ -109,11 +185,13 @@ class contentSection extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="d-flex justify-content-center">
+
                         <div className="account-box-content col-12">
                             <div className="form-account-title">
                                 <label htmlFor="email">پست الکترونیک</label>
                                 {/*<span className="invalid-feedback rtl m-0" style={{ display: errors["password"] ? 'block' : 'none' }}>{errors["password"]}</span>*/}
                                 <input type="text"
+                                       onClick={this.handleClsInput}
                                        id="email"
                                        className="number-email-input text-left my-2"
                                        name="email"
@@ -124,9 +202,12 @@ class contentSection extends Component {
                         </div>
                     </Modal.Body>
                     <Modal.Footer className="account-box-content p-2">
-                        <div className="form-row-account col-12">
-                            <button onClick={this.handleRedirect} className={"btn " + (this.state.email.length > 2 ?  "btn-login"  : "disable-btn")} disabled={this.state.email.length > 2 ? false : true}>
+                        <div className="d-flex form-row-account col-12">
+                            <button onClick={this.handleUpdateEmail} className={"mx-1 col btn " + (this.state.email.length > 2 ?  "btn-login"  : "disable-btn")} disabled={this.state.email.length > 2 ? false : true}>
                                 ثبت تغیرات
+                            </button>
+                            <button onClick={this.handleClose} className={"mx-1 col btn btn-dark"} >
+                                بازگشت
                             </button>
                         </div>
                     </Modal.Footer>
@@ -139,12 +220,15 @@ class contentSection extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="d-flex justify-content-center">
+
                         <div className="account-box-content col-12">
                             <div className="form-account-title">
                                 <label htmlFor="phone">شماره تلفن همراه</label>
                                 {/*<span className="invalid-feedback rtl m-0" style={{ display: errors["password"] ? 'block' : 'none' }}>{errors["password"]}</span>*/}
-                                <input type="text"
+                                <input type="tel"
+                                       onClick={this.handleClsInput}
                                        id="phone"
+                                       maxLength={11}
                                        className="number-email-input text-left my-2"
                                        name="phone"
                                        onChange={this.onChange}
@@ -154,9 +238,12 @@ class contentSection extends Component {
                         </div>
                     </Modal.Body>
                     <Modal.Footer className="account-box-content p-2">
-                        <div className="form-row-account col-12">
-                            <button onClick={this.handleRedirect} className={"btn " + (this.state.phone.length > 2 ?  "btn-login"  : "disable-btn")} disabled={this.state.phone.length > 2 ? false : true}>
+                        <div className="d-flex form-row-account col-12">
+                            <button onClick={this.handleUpdatePhone} className={"mx-1 col btn " + (this.state.phone.length > 2 ?  "btn-login"  : "disable-btn")} disabled={this.state.phone.length > 2 ? false : true}>
                                 ثبت تغیرات
+                            </button>
+                            <button onClick={this.handleClose} className={"mx-1 col btn btn-dark"} >
+                                بازگشت
                             </button>
                         </div>
                     </Modal.Footer>
@@ -173,7 +260,9 @@ class contentSection extends Component {
                             <div className="form-account-title">
                                 <label htmlFor="home_phone">تلفن ثابت</label>
                                 {/*<span className="invalid-feedback rtl m-0" style={{ display: errors["password"] ? 'block' : 'none' }}>{errors["password"]}</span>*/}
-                                <input type="text"
+                                <input type="tel"
+                                       onClick={this.handleClsInput}
+                                       maxLength={11}
                                        id="home_phone"
                                        className="number-email-input text-left my-2"
                                        name="home_phone"
@@ -184,9 +273,12 @@ class contentSection extends Component {
                         </div>
                     </Modal.Body>
                     <Modal.Footer className="account-box-content p-2">
-                        <div className="form-row-account col-12">
-                            <button onClick={this.handleRedirect} className={"btn " + (this.state.home_phone.length > 2 ?  "btn-login"  : "disable-btn")} disabled={this.state.home_phone.length > 2 ? false : true}>
+                        <div className="d-flex form-row-account col-12">
+                            <button onClick={this.handleUpdateHomePhone} className={"mx-1 col btn " + (this.state.home_phone.length > 2 ?  "btn-login"  : "disable-btn")} disabled={this.state.home_phone.length > 2 ? false : true}>
                                 ثبت تغیرات
+                            </button>
+                            <button onClick={this.handleClose} className={"mx-1 col btn btn-dark"} >
+                                بازگشت
                             </button>
                         </div>
                     </Modal.Footer>
@@ -199,11 +291,14 @@ class contentSection extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="d-flex justify-content-center">
+
                         <div className="account-box-content col-12">
                             <div className="form-account-title">
                                 <label htmlFor="national_code">کد ملی</label>
                                 {/*<span className="invalid-feedback rtl m-0" style={{ display: errors["password"] ? 'block' : 'none' }}>{errors["password"]}</span>*/}
-                                <input type="text"
+                                <input type="tel"
+                                       onClick={this.handleClsInput}
+                                       maxLength={10}
                                        id="national_code"
                                        className="number-email-input text-left my-2"
                                        name="national_code"
@@ -214,9 +309,12 @@ class contentSection extends Component {
                         </div>
                     </Modal.Body>
                     <Modal.Footer className="account-box-content p-2">
-                        <div className="form-row-account col-12">
-                            <button onClick={this.handleRedirect} className={"btn " + (this.state.national_code.length > 2 ?  "btn-login"  : "disable-btn")} disabled={this.state.national_code.length > 2 ? false : true}>
+                        <div className="d-flex form-row-account col-12">
+                            <button onClick={this.handleUpdateNationalCode} className={"mx-1 col btn " + (this.state.national_code.length > 2 ?  "btn-login"  : "disable-btn")} disabled={this.state.national_code.length > 2 ? false : true}>
                                 ثبت تغیرات
+                            </button>
+                            <button onClick={this.handleClose} className={"mx-1 col btn btn-dark"} >
+                                بازگشت
                             </button>
                         </div>
                     </Modal.Footer>
@@ -251,7 +349,7 @@ class contentSection extends Component {
                                         </div>
                                         {
                                             userInfo.email != null ?
-                                                <div className="value">userInfo.email</div>
+                                                <div className="value">{userInfo.email}</div>
                                                 :
                                                 <div className="value">ــ</div>
                                         }
@@ -295,7 +393,14 @@ class contentSection extends Component {
                                         <div className="title">  تاریخ عضویت :</div>
                                         {
                                             userInfo.created_at != null ?
-                                                <div className="value">{userInfo.created_at}</div>
+                                                <div className="value">
+                                                    {
+                                                        userInfo.created_at === 0 ? 0 :
+                                                            userInfo.created_at.toString().substring(10, 0)
+                                                                .replace(/-/g, "/")
+                                                    }
+
+                                                </div>
                                                 :
                                                 <div className="value">ــ</div>
 
@@ -313,7 +418,6 @@ class contentSection extends Component {
                                                 <div className="value">{userInfo.national_code}</div>
                                                 :
                                                 <div className="value">ــ</div>
-
                                         }
                                     </td>
                                 </tr>
@@ -351,7 +455,7 @@ class contentSection extends Component {
                         </div>
                     </div>
                 </div>
-            </>
+            </React.Fragment>
         );
     }
 }
@@ -359,7 +463,38 @@ class contentSection extends Component {
 contentSection.propTypes = {};
 const mapStateToProps = (state) => {
     return {
-        auth: state.auth
+        auth: state.auth,
     }
 }
-export default connect(mapStateToProps)(contentSection);
+const mapDispatchToProps = dispatch => {
+    return {
+        getToUpdateFullname: (data,config) => {
+            dispatch(updateFullname(data,config , callback => {
+            dispatch(loginSuccess(callback))
+            }))
+        },
+        getToUpdatePhone: (data,config) => {
+          dispatch(updatePhone(data,config, callback => {
+              dispatch(loginSuccess(callback))
+          }))
+        },
+        getToUpdateHomePhone: (data,config) => {
+            dispatch(updateHomePhone(data,config, callback => {
+                dispatch(loginSuccess(callback))
+            }))
+        },
+        getToUpdateEmail: (data,config) => {
+            dispatch(updateEmail(data, config, callback => {
+                dispatch(loginSuccess(callback))
+            }))
+        },
+        getToUpdateNationalCode: (data,config) => {
+            dispatch(updateNationalCode(data, config, callback => {
+                dispatch(loginSuccess(callback))
+            }))
+        },
+
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(contentSection);

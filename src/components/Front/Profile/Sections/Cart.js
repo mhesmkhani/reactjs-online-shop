@@ -18,11 +18,13 @@ class Favorite extends Component {
 
 
     componentDidMount() {
+        document.title = "سبد خرید"
         const apiToken = this.props.auth.apiToken
         if (apiToken.length > 0) {
             const config = {
                 headers: {'Authorization': this.props.auth.apiToken}
             }
+
             this.props.getUserCart(config);
         }
     }
@@ -39,7 +41,13 @@ class Favorite extends Component {
                 quantity: document.getElementById(id).value
             }
             this.props.onClickToUpdateCart(data,config)
-            this.componentDidMount();
+            setTimeout(
+                function() {
+                    this.componentDidMount();
+                }
+                    .bind(this),
+                100
+            )
         }
     }
 
@@ -58,7 +66,13 @@ class Favorite extends Component {
                     quantity: document.getElementById(id).value
                 }
                 this.props.onClickToUpdateCart(data,config)
-                this.componentDidMount();
+                setTimeout(
+                    function() {
+                        this.componentDidMount();
+                    }
+                        .bind(this),
+                    100
+                )
             }
 
         }
@@ -72,7 +86,13 @@ class Favorite extends Component {
             product_id: id,
         }
         this.props.onClickToRemoveCart(data,config)
-        this.componentDidMount();
+        setTimeout(
+            function() {
+                this.componentDidMount();
+            }
+                .bind(this),
+            100
+        )
     }
 
 
@@ -99,7 +119,7 @@ class Favorite extends Component {
             return a + b;
         }, 0);
         return (
-            <>
+            <React.Fragment>
                 <div className="col-lg-9 col-md-9 col-xs-12 pl">
                     <div className="profile-content">
                         <div className="profile-stats">
@@ -202,10 +222,10 @@ class Favorite extends Component {
                                                                                         <div
                                                                                             className="cart-empty text-center ">
                                                                                             <div className="cart-empty-img mb-4 mt-4">
-                                                                                                <img src={Icon.CertEmptyRef}/>
+                                                                                                <img src={Icon.CertEmptyRef} width={200}/>
                                                                                             </div>
                                                                                             <p className="cart-empty-title">
-                                                                                                سبد خرید شما در حال حاضر خالی است.
+                                                                                                سبد خرید شما در حال حاضر خالی است
                                                                                             </p>
                                                                                         </div>
                                                                 </div>
@@ -277,7 +297,7 @@ class Favorite extends Component {
                         </div>
                     </div>
                 </div>
-            </>
+            </React.Fragment>
 
 
         );
@@ -305,3 +325,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Favorite);
+

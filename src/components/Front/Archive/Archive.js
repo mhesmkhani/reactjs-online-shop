@@ -4,6 +4,8 @@ import Footer from "../Footer/Footer";
 import Index from "./Index";
 import {connect} from "react-redux";
 import * as action from '../../../redux/actions/SearchProductAction'
+import {fetchSearch} from "../../../redux/actions/SearchProductAction";
+import {setClearSingleProduct} from "../../../redux/actions/GetProductAction";
 
 class Archive extends Component {
     constructor(props) {
@@ -18,15 +20,18 @@ class Archive extends Component {
     }
 
     componentDidMount() {
+       let param =  this.props.match.params.q
+       this.props.search(param)
+
     }
 
     render() {
         return (
-            <div>
+            <React.Fragment>
                  <Header/>
                   <Index/>
                  <Footer/>
-            </div>
+            </React.Fragment>
         );
     }
 }
@@ -38,4 +43,12 @@ const mapStateToProps = (state) => {
         search: state.search
     }
 }
-export default connect(mapStateToProps)(Archive);
+const mapDispatchToProps = dispatch => {
+    return {
+        search: slug => {
+            dispatch(fetchSearch(slug))
+        },
+    }
+
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Archive);

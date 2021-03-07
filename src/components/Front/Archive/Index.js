@@ -22,8 +22,9 @@ class Index extends Component {
 
 
     render() {
+
         return (
-            <div>
+            <React.Fragment>
                 <div className="container-main">
                     <div className="d-block">
                         <div className="page-content page-row">
@@ -35,7 +36,7 @@ class Index extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }

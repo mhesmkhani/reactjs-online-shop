@@ -1,29 +1,34 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import * as action from '../../../redux/actions/CategoryAction'
-import PropTypes from 'prop-types';
 import Category from "./SubComponents/Category";
-import CartBasket from "./SubComponents/CartBasket";
 import Responsive from "./SubComponents/Responsive";
 import {NavLink} from "react-router-dom";
 import Icon from "../../../Config/GlobaliCons";
-class Header extends Component {
+import Search from "./SubComponents/Search";
+import {fetchCategory} from "../../../redux/actions/CategoryAction";
+ class Header extends Component {
     constructor(props) {
         super(props);
 
     }
-
     componentDidMount() {
-        this.props.fetchCategory();
+        setTimeout(
+            function() {
+                this.props.getCategory();
+            }
+                .bind(this),
+            100
+        )
     }
 
     handleLogout = () => {
         localStorage.clear();
         window.location.href = '/';
+
     }
 
     render() {
-        const userInfo = this.props.auth.userInfo.data;
+        const userInfo = this.props.auth.userInfo;
         let apiToken = ''
         if (this.props.auth.apiToken.length < 1) {
             apiToken = null
@@ -32,7 +37,7 @@ class Header extends Component {
         }
         const isAuthenticated = apiToken
         return (
-            <>
+            <React.Fragment>
                 <header className="header-main">
                     <div className="container-main">
                         <div className="d-block">
@@ -46,22 +51,7 @@ class Header extends Component {
                                                 </NavLink>
                                             </div>
                                         </div>
-                                        <div className="col-lg-9 pl">
-                                            <div className="header-search row text-right">
-                                                <div className="header-search-box">
-                                                    <form action="#" className="form-search">
-                                                        <input type="search" className="header-search-input"
-                                                               name="search-input"
-                                                               placeholder="نام کالا، برند و یا دسته مورد نظر خود را جستجو کنید…"/>
-                                                        <div className="action-btns">
-                                                            <button className="btn btn-search" type="submit">
-                                                                <i className="fa fa-search"></i>
-                                                            </button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
+                                  <Search/>
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col-md-3 col-xs-12 pl">
@@ -110,7 +100,7 @@ class Header extends Component {
 
                                                                         </li>
                                                                         <li className="account-item">
-                                                                            <NavLink to="#" className="account-link">سفارشات  من</NavLink>
+                                                                            <NavLink to="/profile/orders" className="account-link">سفارشات  من</NavLink>
 
                                                                         </li>
 
@@ -123,8 +113,6 @@ class Header extends Component {
                                                                 :
                                                                 null
                                                         }
-
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -138,20 +126,23 @@ class Header extends Component {
                     </div>
                 </header>
                 <div className="nav-categories-overlay"></div>
-            </>
+            </React.Fragment>
         );
     }
 }
 
 Header.propTypes = {};
 
-const mapDispatchToProps = dispatch => ({
-    dispatch
-})
-
+const mapDispatchToProps = dispatch => {
+    return {
+        getCategory: () => {
+            dispatch(fetchCategory())
+        },
+    }
+}
 const mapStateToProps = (state) => {
     return {
         auth: state.auth
     }
 }
-export default connect(mapStateToProps, action)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

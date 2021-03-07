@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import {Redirect, Route} from "react-router-dom";
+import * as action from './redux/actions/AuthAction'
+
 import PropTyps from 'prop-types';
 import { connect } from 'react-redux'
 
@@ -9,27 +11,36 @@ export class PrivateRoute extends Component {
         // component : PropTyps.func.isRequired,
         // path : PropTyps.string.isRequired
     };
+    constructor(props) {
+        super(props);
+        this.state = {
+            isAuth: false
+        }
 
+    }
+
+    componentDidMount() {
+        const config = {
+            headers: {'Authorization': this.props.auth.apiToken}
+        }
+        this.props.getUserCheck(config,callback => {
+            if(callback === "success"){
+                this.setState({
+                    isAuth: true
+                })
+            }
+        })
+    }
 
     render() {
         const { component: Component,  ...restProps } = this.props;
-        let apiToken = ''
-        if(this.props.auth.apiToken.length < 1){
-            apiToken = null
-        }else {
-            apiToken = this.props.auth.apiToken
-        }
-        const isAuthenticated = apiToken
-
         return <Route {...restProps} render={(props) => (
 
-            isAuthenticated ? (
+            this.state.isAuth ? (
                 // alert("success"),
                 <Component {...props}/>
-            ) : (
-                // alert("fail"),
-                <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
-            )
+            ) :
+                null
         )} />
     }
 
@@ -40,4 +51,4 @@ const mapStateToProps = (state) => {
         auth: state.auth
     }
 }
-export default connect(mapStateToProps)(PrivateRoute)
+export default connect(mapStateToProps,action)(PrivateRoute)

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import 'react-dropzone-uploader/dist/styles.css'
 import Dropzone from 'react-dropzone-uploader'
 import axios from 'axios';
+import ApiUrl from '../../Config/ApiUrls'
 
 class Uploader extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class Uploader extends Component {
 
     }
      getUploadParams = () => {
-        return { url: 'http://127.0.0.1:8000/api/product_images/store' }
+        return { url: ApiUrl.BaseServiceUrl + ApiUrl.UploadProductImageUrl }
     }
 
      handleChangeStatus = ({ meta }, status) => {

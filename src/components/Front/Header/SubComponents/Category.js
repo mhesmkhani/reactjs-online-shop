@@ -28,7 +28,7 @@ class Category extends Component {
     render() {
         const {category} = this.props;
         const categoryData = category.category;
-        const userInfo = this.props.auth.userInfo.data;
+        const userInfo = this.props.auth.userInfo;
         let apiToken = ''
         if (this.props.auth.apiToken.length < 1) {
             apiToken = null
@@ -38,7 +38,7 @@ class Category extends Component {
         const isAuthenticated = apiToken
 
         return (
-            <>
+            <React.Fragment>
                 <nav className="header-main-nav">
                     <div className="d-block">
                         <div className="align-items-center">
@@ -46,21 +46,21 @@ class Category extends Component {
                                 {
                                     categoryData.map(category =>
                                         <li id="nav-menu-item" className="menu-item nav-overlay">
-                                            <a href="#" className="current-link-menu">
+                                            <a href="#" className="current-link-menu ">
                                                 {category.title}
                                             </a>
-                                            <ul className="sub-menu is-mega-menu mega-menu-level-two">
+                                            <ul className="sub-menu is-mega-menu mega-menu-level-two" >
                                                 {
                                                     category.subcategories.map(subcategory =>
                                                         <li className="menu-mega-item menu-item-type-mega-menu">
                                                             <a href="#" className="mega-menu-link">
                                                                 {subcategory.title}
                                                             </a>
-                                                            <ul className="sub-menu mega-menu-level-three">
+                                                            <ul id={"scrollbar"} className="sub-menu mega-menu-level-three" style={{ height: 250, overflowY: 'auto' }}>
                                                                 {
                                                                     subcategory.sub_subcategories.map(item =>
                                                                     <li className="menu-mega-item-three">
-                                                                    <Link to={"/category/search?q=" + (item.title.replace(/ /g, "-"))} onClick={() => this.handleGetSearch(item.title.replace(/ /g, "-"))}>
+                                                                    <Link to={"/category/search/" + (item.title.replace(/ /g, "-"))} onClick={() => this.handleGetSearch(item.title.replace(/ /g, "-"))}>
                                                                         {item.title}
                                                                     </Link >
                                                                     </li>
@@ -86,7 +86,7 @@ class Category extends Component {
                         </div>
                     </div>
                 </nav>
-            </>
+            </React.Fragment>
         );
     }
 }

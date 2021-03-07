@@ -11,6 +11,7 @@ export function getBreadCrumb(id) {
             .then(response => {
                 data = response.data.data;
                 dispatch(setBreadCrumb(response.data.data));
+
             }).catch(error => {
                 throw(error);
             });

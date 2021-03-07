@@ -19,7 +19,7 @@ class Sidebar extends Component {
 
     render() {
         return (
-            <div>
+            <React.Fragment>
                 <div className="col-lg-3 col-md-3 col-xs-12 pr sticky-sidebar">
                     <div className="shop-archive-sidebar">
                         <div className="sidebar-archive mb-3">
@@ -212,7 +212,7 @@ class Sidebar extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }

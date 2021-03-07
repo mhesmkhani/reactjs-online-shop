@@ -13,6 +13,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import reducers from './redux/reducers/index'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import {BrowserRouter} from "react-router-dom";
+import axios from 'axios';
 const persistConfig = {
     key: 'root',
     storage,
@@ -25,6 +26,7 @@ const store = createStore(persistedReducer, composeWithDevTools(
 const persistor = persistStore(store)
 
 ReactDOM.render(
+
     <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
             <BrowserRouter>

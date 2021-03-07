@@ -19,7 +19,7 @@ class Icons extends Component {
 
     render() {
         return (
-            <div>
+            <React.Fragment>
                 <div className="product-usp">
                     <div className="product-feature">
                         <div className="product-feature-col">
@@ -62,7 +62,7 @@ class Icons extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }

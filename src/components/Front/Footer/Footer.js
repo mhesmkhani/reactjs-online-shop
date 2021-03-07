@@ -15,7 +15,7 @@ class Footer extends Component {
 
     render() {
         return (
-            <>
+            <React.Fragment>
                 <footer className="footer-main-site">
                     <section className="d-block d-xl-block d-lg-block d-md-block d-sm-block order-1">
                         <div className="footer-shopping-features">
@@ -221,7 +221,7 @@ class Footer extends Component {
                         </div>
                     </section>
                 </footer>
-            </>
+            </React.Fragment>
         );
     }
 }

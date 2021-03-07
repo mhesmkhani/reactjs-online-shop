@@ -4,6 +4,7 @@ import {NavLink} from "react-router-dom";
 import validator from "validator";
 import {connect} from "react-redux";
 import * as action from '../../../../redux/actions/AuthAction'
+import Icon from "../../../../Config/GlobaliCons";
 
 class ReceiveCode extends Component {
     constructor(props) {
@@ -43,9 +44,6 @@ class ReceiveCode extends Component {
 
     receiveCode = () => {
 
-        this.setState({
-            spinner: true
-        });
         const data = {
             phone: this.state.phone,
         }
@@ -62,7 +60,6 @@ class ReceiveCode extends Component {
                 }
             }
             this.setState({
-                spinner: false,
                 errors
             })
 
@@ -72,14 +69,16 @@ class ReceiveCode extends Component {
     render() {
         const {errors} = this.state
         return (
-            <>
+            <React.Fragment>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg">
                             <section className="page-account-box">
                                 <div className="col-lg-6 col-md-6 col-xs-12 mx-auto">
                                     <div className="ds-userlogin">
-                                        <NavLink to="/" className="account-box-logo">digismart</NavLink>
+                                        <NavLink to={"/"} className={"d-flex justify-content-center"}>
+                                            <img src={Icon.Logo} alt="سرمد"/>
+                                        </NavLink>
                                         <div className="account-box">
                                             <div className="account-box-headline">
                                                 <NavLink to="/login" className="login-ds" activeClassName="active">
@@ -128,7 +127,7 @@ class ReceiveCode extends Component {
                         </div>
                     </div>
                 </div>
-            </>
+            </React.Fragment>
         );
     }
 }

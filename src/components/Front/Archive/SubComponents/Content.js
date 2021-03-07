@@ -23,9 +23,10 @@ class Sidebar extends Component {
         this.props.getSingleProductData(data)
     }
     render() {
+
         const searchProductResult = this.props.search.searchProduct;
         return (
-            <div>
+            <React.Fragment>
                 <div className="col-lg-9 col-md-9 col-xs-12 pl">
                     <div className="shop-archive-content mt-3 d-block">
                         <div className="archive-header">
@@ -91,9 +92,9 @@ class Sidebar extends Component {
                                                                     <i className="fa fa-star active"></i>
                                                                     <i className="fa fa-star"></i>
                                                                 </div>
-                                                                <div className="discount-d">
-                                                                    <span>20%</span>
-                                                                </div>
+                                                                {/*<div className="discount-d">*/}
+                                                                {/*    <span>20%</span>*/}
+                                                                {/*</div>*/}
                                                                 {
                                                                     <img src={ApiUrl.BaseUrl + (productData.images[0].filename)}/>
                                                                 }
@@ -148,7 +149,7 @@ class Sidebar extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }

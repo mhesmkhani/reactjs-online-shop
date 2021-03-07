@@ -2,6 +2,7 @@ export const GET_CATEGORY = "GET_CATEGORY";
 export const USER_LOGIN = "USER_LOGIN";
 export const GET_API_TOKEN = "GET_API_TOKEN";
 export const GET_SEARCH_PRODUCT = "GET_SEARCH_PRODUCT";
+export const GET_SEARCH_RESULT = "GET_SEARCH_RESULT";
 export const SET_SEARCH_VALUE = "SET_SEARCH_VALUE";
 export const GET_SINGLE_PRODUCT = "GET_SINGLE_PRODUCT";
 export const GET_CLEAR_SINGLE_PRODUCT = "GET_CLEAR_SINGLE_PRODUCT";
@@ -10,6 +11,8 @@ export const GET_USER_FAVORITE = "GET_USER_FAVORITE";
 export const GET_USER_CART = "GET_USER_CART";
 export const GET_PROVINCE = "GET_PROVINCE";
 export const GET_CITIES = "GET_CITIES";
+export const GET_USER_ORDERS = "GET_USER_ORDERS";
+export const SET_ERROR = "SET_ERROR";
 
 
 

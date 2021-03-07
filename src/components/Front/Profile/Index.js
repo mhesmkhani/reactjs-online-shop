@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import {fetchSingleProduct, setClearSingleProduct} from "../../../redux/actions/GetProductAction";
 import {fetchFavorite} from "../../../redux/actions/FavoriteAction";
 import Cart from "./Sections/Cart";
+import Orders from "./Sections/Orders";
 
 class Index extends Component {
     constructor(props) {
@@ -38,9 +39,12 @@ class Index extends Component {
             case "/profile/cart":
                 item.push(<Cart/>)
                 break;
+            case "/profile/orders":
+                item.push(<Orders/>)
+                break;
         }
         return (
-            <>
+            <React.Fragment>
                 <div className="container-main">
                     <div className="d-block">
                         <section className="profile-home">
@@ -53,7 +57,7 @@ class Index extends Component {
                         </section>
                     </div>
                 </div>
-            </>
+            </React.Fragment>
         );
     }
 }

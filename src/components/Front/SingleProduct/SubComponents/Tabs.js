@@ -21,12 +21,20 @@ class Tabs extends Component {
         const singleProdcut = this.props.singleProduct.singleProduct;
 
         return (
-            <div>
+            <React.Fragment>
                 <div className="tabs">
                     <div className="tab-box">
                         <ul className="tab nav nav-tabs" id="myTab" role="tablist">
                             <li className="nav-item">
-                                <a className="nav-link active" id="Specifications-tab" data-toggle="tab"
+                                <a className="nav-link active" id="Review-tab" data-toggle="tab"
+                                   href="#Review" role="tab" aria-controls="Review"
+                                   aria-selected="true">
+                                    <i className="mdi mdi-format-list-checks"></i>
+                                    <span style={{fontSize: 'large'}}>نقد و بررسی</span>
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" id="Specifications-tab" data-toggle="tab"
                                    href="#Specifications" role="tab" aria-controls="Specifications"
                                    aria-selected="true">
                                     <i className="mdi mdi-format-list-checks"></i>
@@ -48,7 +56,23 @@ class Tabs extends Component {
                             singleProdcut.map(product =>
                                 <div className="tabs-content">
                                     <div className="tab-content" id="myTabContent">
-                                        <div className="tab-pane fade show active" id="Specifications" role="tabpanel"
+                                        <div className="tab-pane fade show active" id="Review" role="tabpanel"
+                                             aria-labelledby="Review-tab">
+                                            <h2 className="params-headline">توضیحات</h2>
+                                            <section className="content-expert-summary">
+                                                <div className="mask pm-3">
+                                                    <div className="mask-text">
+                                                     <p>{product.description}</p>
+                                                    </div>
+                                                    {/*<a href="#" className="mask-handler">*/}
+                                                    {/*    <span className="show-more">+ ادامه مطلب</span>*/}
+                                                    {/*    <span className="show-less">- بستن</span>*/}
+                                                    {/*</a>*/}
+                                                    {/*<div className="shadow-box"></div>*/}
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div className="tab-pane fade show" id="Specifications" role="tabpanel"
                                              aria-labelledby="Specifications-tab">
                                             <article>
                                                 <h2 className="params-headline">مشخصات فنی
@@ -332,7 +356,7 @@ class Tabs extends Component {
                             )}
                     </div>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }

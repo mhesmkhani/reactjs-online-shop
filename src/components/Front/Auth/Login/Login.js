@@ -3,19 +3,18 @@ import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import {NavLink} from "react-router-dom";
 import validator from 'validator';
-import Loader from "react-loader-spinner";
 
 import * as action from "../../../../redux/actions/AuthAction";
 import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
 import {getApiToken} from "../../../../redux/actions/AuthAction";
 import Modal from "react-bootstrap/Modal";
+import Icon from "../../../../Config/GlobaliCons";
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            spinner: false,
             phone: '',
             password: '',
             errors: {}
@@ -53,44 +52,33 @@ class Login extends Component {
 
     loginUser = () => {
 
-        this.setState({
-            spinner: true
-        });
         const data = {
             phone: this.state.phone,
             password: this.state.password,
         }
 
         this.props.UserLogin(data,(message,apiToken) => {
-            let errors = {}
-            let token = apiToken
+            console.log(apiToken)
             if (message === 'success'){
-                this.props.SetApiToken(token)
+                this.props.SetApiToken(apiToken)
                 this.props.history.push(`/profile`);
-            }else {
-                if(message === 'error'){
-                  errors["login"] = 'نام کاربری یا رمز عبور اشتباه است!'
-                    this.setState({
-                        spinner: false,
-                        errors
-                    })
-                }
-
             }
         });
     }
 
     render() {
-        const {errors,spinner} = this.state
+        const {errors} = this.state
         return (
-            <>
+            <React.Fragment>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg">
                             <section className="page-account-box">
                                 <div className="col-lg-6 col-md-6 col-xs-12 mx-auto">
                                     <div className="ds-userlogin">
-                                        <NavLink to="/" className="account-box-logo">digismart</NavLink>
+                                        <NavLink to={"/"} className={"d-flex justify-content-center"}>
+                                            <img src={Icon.Logo} alt="سرمد"/>
+                                        </NavLink>
                                         <div className="account-box">
                                             <div className="account-box-headline">
                                                 <NavLink to="/login" className="login-ds" activeClassName="active">
@@ -148,14 +136,6 @@ class Login extends Component {
                                                             <label htmlFor="remember" className="remember-me mr-0">مرا
                                                                 به خاطر بسپار</label>
                                                         </div>
-                                                         {
-                                                                spinner ?
-                                                                    <div className="loading-parent d-flex justify-content-center position-absolute mt-3" >
-                                                                        <Loader className="text-center  position-absolute" type="Oval" color="#00bfd6" height={30} width={30} style={{zIndex:1600}}/>
-                                                                    </div>
-                                                                    :
-                                                                    null
-                                                         }
 
                                                         <div className="form-row-account">
                                                             <button onClick={this.handleSubmit} className="btn btn-primary btn-login">
@@ -172,7 +152,7 @@ class Login extends Component {
                         </div>
                     </div>
                 </div>
-            </>
+            </React.Fragment>
         );
     }
 }

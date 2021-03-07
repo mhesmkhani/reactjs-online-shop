@@ -23,11 +23,11 @@ class Profile extends Component {
 
     render() {
         return (
-            <>
+            <React.Fragment>
                 <Header/>
                 <Index location={this.props.location}/>
                 <Footer/>
-            </>
+            </React.Fragment>
         );
     }
 }

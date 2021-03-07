@@ -33,7 +33,13 @@ class CartBasket extends Component {
             product_id: id,
         }
         this.props.onClickToRemoveCart(data,config)
-        this.componentDidMount();
+        setTimeout(
+            function() {
+                this.componentDidMount();
+            }
+                .bind(this),
+            100
+        )
     }
 
     render() {
@@ -59,7 +65,7 @@ class CartBasket extends Component {
             return a + b;
         }, 0);
           return (
-            <>
+            <React.Fragment>
                 <div className="divider-space-card d-block">
                     <div className="header-cart-basket">
                         <a href="#" className="cart-basket-box">
@@ -135,7 +141,7 @@ class CartBasket extends Component {
                         </div>
                     </div>
                 </div>
-            </>
+            </React.Fragment>
         );
     }
 }

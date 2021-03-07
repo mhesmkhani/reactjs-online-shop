@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import ApiUrls from "../../../../Config/ApiUrls";
 import {deleteCart, fetchCarts, updateCart} from "../../../../redux/actions/CartAction";
+import {addOrderProducts, fetchOrders} from "../../../../redux/actions/OrdersAction";
 
 class DetailProduct extends Component {
     constructor(props) {
@@ -21,6 +22,40 @@ class DetailProduct extends Component {
                 headers: {'Authorization': this.props.auth.apiToken}
             }
             this.props.getUserCart(config);
+        }
+    }
+
+    handleSetOrders = () => {
+        const apiToken = this.props.auth.apiToken
+        const userInfo = this.props.auth.userInfo;
+        const {cart} = this.props;
+        const cartData = cart.cart;
+        let quantity = 0;
+        let price = 0;
+        let totalPrice = [];
+        quantity = cartData.map(product => product.pivot.quantity);
+        price = cartData.map(product => product.price);
+        quantity.map((q, indexQ) => {
+            price.map((p, indexP) => {
+                switch (indexQ) {
+                    case indexP:
+                        totalPrice.push(q * p);
+                        break;
+                }
+            })
+        })
+        let finalSumPrice = totalPrice.reduce(function (a, b) {
+            return a + b;
+        }, 0);
+        if (apiToken.length > 0) {
+            const config = {
+                headers: {'Authorization': apiToken}
+            }
+            const data = {
+                user_id: userInfo.id,
+                order_total_price: finalSumPrice
+            }
+            this.props.getToOrders(data,config)
         }
     }
 
@@ -48,7 +83,7 @@ class DetailProduct extends Component {
         }, 0);
 
         return (
-            <>
+            <React.Fragment>
                 <h3 className="order-review-heading">سفارش شما</h3>
                 <div className="checkout-review-order">
                         <div className="row justify-content-center px-4 pb-2">
@@ -80,44 +115,11 @@ class DetailProduct extends Component {
                             <span className={"mx-1"} style={{fontWeight:500}}>رایگان</span>
                         </div>
                     </div>
-                    <ul className="checkout-payment-methods">
-                        <li className="checkout-payment-method-item d-block">
-                            <label htmlFor="#" className="outline-radio">
-                                <input type="radio" name="payment_method"
-                                       id="payment-option-online"/>
-                                <span className="outline-radio-check"></span>
-                            </label>
-                            <label htmlFor="#" className="shipping-totals-title-row">
-                                <div className="shipping-totals-title">پرداخت اینترنتی هوشمند
-                                </div>
-                            </label>
-                        </li>
-                        <li className="checkout-payment-method-item d-block">
-                            <label htmlFor="#" className="outline-radio">
-                                <input type="radio" name="payment_method"
-                                       id="payment-option-online"/>
-                                <span className="outline-radio-check"></span>
-                            </label>
-                            <label htmlFor="#" className="shipping-totals-title-row">
-                                <div className="shipping-totals-title">پرداخت هنگام دریافت</div>
-                            </label>
-                        </li>
-                    </ul>
-                    {/*<div className="form-auth-row">*/}
-                    {/*    <label htmlFor="#" className="ui-checkbox mt-1">*/}
-                    {/*        <input type="checkbox" value="1" name="login" id="remember"/>*/}
-                    {/*        <span className="ui-checkbox-check"></span>*/}
-                    {/*    </label>*/}
-                    {/*    <label htmlFor="remember" className="remember-me mr-0"><a href="#">حریم*/}
-                    {/*        خصوصی</a> و <a href="#">شرایط قوانین </a>استفاده از سرویس های*/}
-                    {/*        سایت دیجی‌اسمارت را مطالعه نموده و با کلیه موارد آن موافقم <abbr*/}
-                    {/*            className="required" title="ضروری">*</abbr></label>*/}
-                    {/*</div>*/}
-                    <button className="btn-Order btn btn-primary mt-4 mb-3" type="submit">ثبت
+                    <button onClick={this.handleSetOrders} className="btn-Order btn btn-primary mt-4 mb-3" type="submit">ثبت
                         سفارش
                     </button>
                 </div>
-            </>
+            </React.Fragment>
         );
     }
 }
@@ -129,10 +131,30 @@ const mapStateToProps = (state) => {
         cart: state.cart,
     }
 }
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         getUserCart: config => {
             dispatch(fetchCarts(config))
+        },
+        getToOrders: (data,config) => {
+            dispatch(fetchOrders(data,config , callback => {
+                const cart = callback.state.cart.cart
+                const apiToken = callback.state.auth.apiToken
+                const order_id = callback.res.order_id
+                const config = {
+                    headers: {'Authorization': apiToken}
+                }
+                const data = {
+                    product_id: cart.map(product => product.id),
+                    order_id: order_id,
+                    quantity:  cart.map(product => product.pivot.quantity),
+                }
+                if(callback.res.message === "success"){
+                    dispatch(addOrderProducts(data,config,callback => {
+                        console.log(callback)
+                    }))
+                }
+            }))
         },
     }
 }

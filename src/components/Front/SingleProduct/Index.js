@@ -6,11 +6,11 @@ import Content from "./SubComponents/Content";
 import Icons from "./SubComponents/Icons";
 import Tabs from "./SubComponents/Tabs";
 import {connect} from "react-redux";
+import Loader from "react-loader-spinner";
 
 class Index extends Component {
     constructor(props) {
         super(props);
-
     }
 
     componentWillMount() {
@@ -18,14 +18,24 @@ class Index extends Component {
     }
 
     componentDidMount() {
-
+        // this.setState({
+        //     spinner : true
+        // })
+            setTimeout(
+                function () {
+                    document.title = this.props.singleProduct.singleProduct.map(product => product.slug)
+                }
+                    .bind(this),
+                500
+            );
     }
 
 
     render() {
         const singleProduct = this.props.singleProduct.singleProduct.length
         return (
-            <>
+            <React.Fragment>
+
                 {
                     singleProduct > 0 ?
                         <div className="container-main">
@@ -54,7 +64,7 @@ class Index extends Component {
                         null
                 }
 
-            </>
+            </React.Fragment>
         );
     }
 }

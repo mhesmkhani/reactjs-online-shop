@@ -22,13 +22,13 @@ const setFavoriteList = (favorite) => {
     }
 }
 
-export const storeFavorite  = (data,config) => {
+export const storeFavorite  = (data,config,callback) => {
     return dispatch => {
         let message = '';
         const url = ApiUrl.BaseServiceUrl+ApiUrl.SetUserFavoriteUrl;
         return axios.post(url,data,config).then(response => {
            message = response.data.message;
-           return message
+           callback(message)
         }).catch(error => {
             message = error
             throw(error)
@@ -37,13 +37,13 @@ export const storeFavorite  = (data,config) => {
 }
 
 
-export const deleteFavorite  = (data,config) => {
+export const deleteFavorite  = (data,config,callback) => {
     return dispatch => {
         let message = '';
         const url = ApiUrl.BaseServiceUrl+ApiUrl.DeleteUserFavoriteUrl;
         return axios.post(url,data,config).then(response => {
             message = response.data.message;
-            return message
+            callback(message)
         }).catch(error => {
             message = error
             throw(error)

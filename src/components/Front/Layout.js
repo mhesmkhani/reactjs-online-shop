@@ -19,10 +19,10 @@ class Layout extends Component {
 
     render() {
         return (
-            <div>
+            <React.Fragment>
                <Header/>
                <Footer/>
-            </div>
+            </React.Fragment>
         );
     }
 }

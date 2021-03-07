@@ -15,7 +15,7 @@ class Responsive extends Component {
     render() {
 
         return (
-            <>
+            <React.Fragment>
 
                 {/*responsive-megamenu-mobile*/}
                 <nav className="sidebar">
@@ -83,7 +83,7 @@ class Responsive extends Component {
                 </div>
                 <div className="overlay"></div>
                 {/*responsive-megamenu-mobile*/}
-            </>
+            </React.Fragment>
         );
     }
 }

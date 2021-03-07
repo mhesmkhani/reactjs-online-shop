@@ -12,18 +12,44 @@ import VerifyCode from "./components/Front/Auth/Register/VerifyCode";
 import CreatePassword from "./components/Front/Auth/Register/CreatePassword";
 import Profile from "./components/Front/Profile/Profile";
 import PrivateRoute from "./PrivateRoute.js";
+import AdminRoute from "./AdminRoute";
 import Uploader from "./components/Back/Uploader";
 import Archive from "./components/Front/Archive/Archive";
 import SingleProduct from "./components/Front/SingleProduct/SingleProduct";
 import Favorite from "./components/Front/Profile/Sections/Favorite";
 import Checkout from "./components/Front/Checkout/Checkout";
+import withCommonError from "./HOC/withCommonError";
+import React, {Component} from "react";
+import axios from "axios";
+import {Alert} from "react-bootstrap";
+import Modal from "react-bootstrap/Modal";
+import Loader from "react-loader-spinner";
+import {connect} from "react-redux";
+import {setErrorAction} from "./redux/actions/ErrorAction";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import withRequestSpinner from "./HOC/withRequestSpinner";
 
-function App() {
+class App extends Component  {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showModal:false,
+            errorCode: 0,
+            title: ''
+
+        };
+    }
+     componentDidMount() {
+
+     }
+
+
+    render() {
     return (
-        <>
-
+        <React.Fragment>
+            <ToastContainer />
             <Router basename="/">
-
                 <Switch>
                     <Route exact path="/" component={Home}/>
                     <Route path="/cart" component={Test}/>
@@ -31,16 +57,32 @@ function App() {
                     <Route path="/receive-code" component={ReceiveCode}/>
                     <PrivateRoute path="/verify-code" component={VerifyCode}/>
                     <PrivateRoute path="/create-password" component={CreatePassword}/>
-                    <Route path="/category/search" component={Archive}/>
-                    <Route path="/product" component={SingleProduct}/>
-                    <PrivateRoute path="/upload" component={Uploader}/>
+                    <Route path="/category/search/:q?" component={Archive}/>
+                    <Route path="/product/:slug?" component={SingleProduct}/>
+                    <AdminRoute path="/upload" component={Uploader}/>
                     <PrivateRoute path="/profile" component={Profile}/>
                     <PrivateRoute path="/user/checkout" component={Checkout}/>
                     {/*<Route  path="/profile/favorite" component={Favorite}/>*/}
                 </Switch>
             </Router>
-        </>
+        </React.Fragment>
     );
-}
+   }
 
-export default App;
+
+}
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth,
+        favorite: state.favorite
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        // onSetError: error => {
+        //     dispatch(setErrorAction(error))
+        // }
+    }
+
+}
+export default  withRequestSpinner(connect(mapStateToProps,mapDispatchToProps)(App));

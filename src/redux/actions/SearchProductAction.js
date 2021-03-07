@@ -1,12 +1,36 @@
 
 import axios from 'axios';
-import {GET_CLEAR_SINGLE_PRODUCT, GET_SEARCH_PRODUCT} from "./ActionTypes";
+import {GET_CLEAR_SINGLE_PRODUCT, GET_SEARCH_PRODUCT, GET_SEARCH_RESULT} from "./ActionTypes";
 import ApiUrl from "../../Config/ApiUrls";
 
+export function searchProduct(data,callback) {
+    return dispatch => {
+        const url = ApiUrl.BaseServiceUrl+ApiUrl.SearchProductUrl;
+        const message = ''
+        return axios.post(url,data)
+            .then(response => {
+                if (response.data.data.length === 0){
+                    dispatch(setSearchResult([]));
+                    callback("error")
+                }else {
+                    dispatch(setSearchResult(response.data.data));
+                    callback("success")
+                }
+            }).catch(error => {
+                throw(error);
+            });
+    }
+}
+const setSearchResult = (searchResult) => {
+    return {
+        type: GET_SEARCH_RESULT,
+        searchResult,
+    }
+}
 export function fetchSearch(search) {
     return dispatch => {
         const url = ApiUrl.BaseServiceUrl+ApiUrl.CategorySearchUrl;
-        return axios.post(url+search)
+        return axios.get(url+search)
             .then(response => {
                 dispatch(setSearchData(response.data.data));
             }).catch(error => {

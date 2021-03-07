@@ -2,7 +2,7 @@ import {GET_CITIES, GET_PROVINCE} from "../actions/ActionTypes";
 
 const INIT_STATE = {
     provinces: [],
-    cities: [{'name':'zanjan'}]
+    cities: []
 };
 
 const ProvincesReducer = (state = INIT_STATE,action) => {

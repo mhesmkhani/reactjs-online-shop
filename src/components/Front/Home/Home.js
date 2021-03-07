@@ -15,17 +15,17 @@ class Home extends Component {
 
 
     componentDidMount() {
-
+      document.title = " فروشگاه اینترنتی صنایع دستی و فرهنگی سرمد"
     }
 
 
     render() {
         return (
-            <>
+            <React.Fragment>
                 <Header/>
                  <Slider/>
                 <Footer/>
-            </>
+            </React.Fragment>
         );
     }
 }

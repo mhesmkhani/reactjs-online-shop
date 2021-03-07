@@ -11,11 +11,10 @@ class CreatePassword extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            spinner: false,
             password: '',
             confirm_password: '',
             errors: {},
-            show: true
+            show: false
         }
     }
 
@@ -51,11 +50,6 @@ class CreatePassword extends Component {
     }
 
     createPassword = () => {
-
-        this.setState({
-
-            spinner: true
-        });
         const data = {
             password: this.state.password,
             confirm_password: this.state.confirm_password,
@@ -74,7 +68,6 @@ class CreatePassword extends Component {
                     errors["password"] = message;
             }
             this.setState({
-                spinner: false,
                 errors
             })
 
@@ -91,7 +84,8 @@ class CreatePassword extends Component {
     render() {
         const {errors} = this.state
          return (
-            <>
+
+            <React.Fragment>
                 <Modal show={this.state.show} onHide={this.handleClose} dir="rtl">
                     <Modal.Body className="d-flex justify-content-center">
                         <div className="Login-to-account mt-4">
@@ -123,7 +117,9 @@ class CreatePassword extends Component {
                             <section className="page-account-box">
                                 <div className="col-lg-6 col-md-6 col-xs-12 mx-auto">
                                     <div className="ds-userlogin">
-                                        <NavLink to="/" className="account-box-logo">digismart</NavLink>
+                                        <NavLink to={"/"} className={"d-flex justify-content-center"}>
+                                            <img src={Icon.Logo} alt="سرمد"/>
+                                        </NavLink>
                                         <div className="account-box">
                                             <div className="account-box-headline">
                                                 <NavLink to="/login" className="login-ds" activeClassName="active">
@@ -171,6 +167,7 @@ class CreatePassword extends Component {
                                                                    value={this.state.confirm_password}
                                                             />
                                                         </div>
+
                                                         <div className="form-row-account">
                                                             <button onClick={this.handleSubmit}
                                                                     className="btn btn-primary btn-login">
@@ -187,7 +184,7 @@ class CreatePassword extends Component {
                         </div>
                     </div>
                 </div>
-            </>
+            </React.Fragment>
         );
     }
 }

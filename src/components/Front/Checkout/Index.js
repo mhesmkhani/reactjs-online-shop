@@ -15,12 +15,12 @@ class Index extends Component {
     }
 
     componentDidMount() {
-
+        document.title = "تکمیل فرم پرداخت"
     }
 
     render() {
         return (
-            <>
+            <React.Fragment>
                 <div class="container-main">
                     <div class="d-block">
                         <section class="blog-checkout d-block order-1">
@@ -39,7 +39,7 @@ class Index extends Component {
                         </section>
                     </div>
                 </div>
-            </>
+            </React.Fragment>
 
         );
     }

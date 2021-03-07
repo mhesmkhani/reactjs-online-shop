@@ -10,8 +10,9 @@ const ApiUrls = {
     UserRegisterUrl: '/user/register',
     CategoryBreadCrumbUrl: '/category/breadcrumb?id=',
     GetAllCategoryUrl: '/category/all',
-    ProductShowUrl: '/products/show/?q=',
-    CategorySearchUrl: '/category/search/?q=',
+    ProductShowUrl: '/products/show?q=',
+    SearchProductUrl: '/product/search',
+    CategorySearchUrl: '/category/search?q=',
     GetUserFavoriteUrl: '/user/favorite',
     SetUserFavoriteUrl: '/user/favorite/store',
     DeleteUserFavoriteUrl: '/user/favorite/delete',
@@ -21,7 +22,17 @@ const ApiUrls = {
     SetUserCartUrl: '/user/cart/store',
     GetProvinceUrl: '/provinces',
     GetCitiesUrl: '/cities',
-
+    UserFullnameUpdateUrl: '/user/fullname/update',
+    UserPhoneUpdateUrl: '/user/phone/update',
+    UserEmailUpdateUrl: '/user/email/update',
+    UserHomePhoneUpdateUrl: '/user/homePhone/update',
+    UserNationalCodeUpdateUrl: '/user/nationalCode/update',
+    UserOrdersUrl: '/user/orders',
+    GetUserOrdersProductUrl: '/user/orders/product',
+    UserOrderAddUrl: '/user/orders/add',
+    AdminCheckUrl: '/admin/check',
+    UserCheckUrl: '/user/check',
+    UploadProductImageUrl: '/product_images/store',
 };
 
 module.exports = ApiUrls;

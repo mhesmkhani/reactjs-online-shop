@@ -6,9 +6,10 @@ import ReactImageZoom from 'react-image-zoom';
 
 // import 'react-owl-carousel2/style.css'
 
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import {fetchSingleProduct} from "../../../../redux/actions/GetProductAction";
 import {deleteFavorite, fetchFavorite, storeFavorite} from "../../../../redux/actions/FavoriteAction";
+import ApiUrl from "../../../../Config/ApiUrls";
 class Gallery extends Component {
     constructor(props) {
         super(props);
@@ -37,15 +38,29 @@ class Gallery extends Component {
        })
     }
     handleAddFavortie = (id) => {
-        const productID = id[0];
-        const config = {
-            headers: {'Authorization': this.props.auth.apiToken}
+        const apiToken = this.props.auth.apiToken;
+        if(apiToken){
+            const productID = id[0];
+            const config = {
+                headers: {'Authorization': this.props.auth.apiToken}
+            }
+            const data = {
+                product_id: productID,
+            }
+            this.props.onClickToAddFavorite(data,config)
+            setTimeout(
+                function() {
+                    this.componentDidMount();
+                }
+                    .bind(this),
+                100
+            )
+        }else {
+            this.setState({
+                redirect: true
+            })
         }
-        const data = {
-            product_id: productID,
-        }
-        this.props.onClickToAddFavorite(data,config)
-        this.componentDidMount();
+
     }
     handleRemoveFavorite = (id) => {
         const productID = id[0];
@@ -56,22 +71,37 @@ class Gallery extends Component {
             product_id: productID,
         }
         this.props.onClickToRemoveFavorite(data,config)
-        this.componentDidMount();
+        setTimeout(
+            function() {
+                this.componentDidMount();
+            }
+                .bind(this),
+            100
+        )
     }
     render() {
-        const {mainImage} = this.state;
+        const {mainImage,redirect} = this.state;
         const singleProdcut = this.props.singleProduct.singleProduct;
         const {favorite} = this.props;
         const favoriteData = favorite.favorite;
         let isFavorite = false;
+        if(redirect){
+            return <Redirect to={'/login'}/>
+        }
 
-        singleProdcut.map((product,index) => {
-                    favoriteData.reduce((fav, el) => {
-                    if (el.id !== null && product.id === el.id) {
-                        isFavorite = true
-                    }
-                    return fav;
-                }, [])
+        singleProdcut.map((product) => {
+                    /*use Find instead of the reduce*/
+                    favoriteData.find(item => {
+                        if (item.id === product.id){
+                            isFavorite = true
+                        }
+                    })
+                //     favoriteData.reduce((fav, item) => {
+                //     if (item.id !== null && product.id === item.id) {
+                //         isFavorite = true
+                //     }
+                //     return fav;
+                // }, [])
         })
 
         const options = {
@@ -89,7 +119,7 @@ class Gallery extends Component {
             }
         };
         return (
-            <div>
+            <React.Fragment>
                 <div className="col-lg-5 col-xs-12 pr d-block ">
                     <section className="product-gallery">
                         <div className="gallery">
@@ -238,7 +268,7 @@ class Gallery extends Component {
                                                                 <label htmlFor="remember"
                                                                        className="remember-me mr-0">ایمیل
                                                                     به
-                                                                    info@digismart.com</label>
+                                                                    info@esarmad.ir</label>
                                                             </div>
                                                             <div className="form-auth-row">
                                                                 <label htmlFor="#"
@@ -301,8 +331,8 @@ class Gallery extends Component {
                                                             <div id="custom-events">
                                                                 {
                                                                     singleProdcut.map(product => product.images.map(image =>
-                                                                        <a href={"http://127.0.0.1:8000/" + (image.filename)}>
-                                                                            <img  src={"http://127.0.0.1:8000/" + (image.filename)}/>
+                                                                        <a href={ApiUrl.BaseUrl + (image.filename)}>
+                                                                            <img  src={ApiUrl.BaseUrl+ (image.filename)}/>
                                                                         </a>
                                                                     ))}
 
@@ -326,7 +356,7 @@ class Gallery extends Component {
                                 <div className="gallery-img">
                                     {singleProdcut.map(item =>
                                         <a href="#" >
-                                            <img className="background-main-image" src={"http://127.0.0.1:8000/" +(mainImage.length > 1 ? mainImage : item.images[0].filename)} width={500}/>
+                                            <img className="background-main-image" src={ApiUrl.BaseUrl +(mainImage.length > 1 ? mainImage : item.images[0].filename)} width={500}/>
                                         </a>
                                     )}
                                     <div id="gallery_01f"   style={{width: 500, float: 'right'}}>
@@ -338,9 +368,9 @@ class Gallery extends Component {
                                                 <li className="item">
                                                     <div onClick={() => this.handleSetImage(image.filename)} className="elevatezoom-gallery  active"
                                                        data-update=""
-                                                       data-image={"http://127.0.0.1:8000/" + (image.resized_name)}
-                                                       data-zoom-image={"http://127.0.0.1:8000/" + (image.resized_name)}>
-                                                        <img className="cursor-pointer" src={"http://127.0.0.1:8000/" + (image.resized_name)} style={{width: 100}}/>
+                                                       data-image={ApiUrl.BaseUrl + (image.resized_name)}
+                                                       data-zoom-image={ApiUrl.BaseUrl + (image.resized_name)}>
+                                                        <img className="cursor-pointer" src={ApiUrl.BaseUrl + (image.resized_name)} style={{width: 100}}/>
                                                     </div>
                                                 </li>
                                             ))}
@@ -352,7 +382,7 @@ class Gallery extends Component {
                         </div>
                     </section>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }
@@ -362,20 +392,27 @@ const mapStateToProps = (state) => {
     return {
         auth: state.auth,
         singleProduct: state.singleProduct,
-        favorite: state.favorite
+        favorite: state.favorite,
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
         onClickToAddFavorite: (producId,config) => {
-            dispatch(storeFavorite(producId,config))
+            dispatch(storeFavorite(producId,config,callback => {
+                if(callback === "success"){
+                    // alert("success")
+                }
+            }))
         },
         onClickToRemoveFavorite: (producId,config) => {
-            dispatch(deleteFavorite(producId,config))
+            dispatch(deleteFavorite(producId,config,callback => {
+                console.log(callback)
+            }))
         },
         getUserFavorite: config => {
             dispatch(fetchFavorite(config))
-        }
+        },
+
     }
 }
 

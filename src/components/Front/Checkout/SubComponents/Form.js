@@ -3,13 +3,23 @@ import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {deleteCart, fetchCarts, updateCart} from "../../../../redux/actions/CartAction";
 import {fetchCities, fetchProvinces} from "../../../../redux/actions/ProvincesAction";
+import {fetchOrders} from "../../../../redux/actions/OrdersAction";
 
 class Form extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            receiver_name: '',
+            receiver_mobile:'',
+            receiver_phone:'',
             province: '',
             city: '',
+            address:'',
+            plaque: '',
+            post_code:'',
+            home:'',
+            payment_type: 1,
+            description:'',
             province_id: 0
         }
 
@@ -35,21 +45,19 @@ class Form extends Component {
 
     componentDidMount() {
         const apiToken = this.props.auth.apiToken
+        const userInfo = this.props.auth.userInfo;
         if (apiToken.length > 0) {
             this.props.getProvinces();
         }
+
     }
 
     render() {
         const {provinces} = this.props;
         const provinceData = provinces.provinces;
         const citiesData = provinces.cities;
-        console.log(this.state.province)
-        console.log(this.state.city)
-        const citiesList = []
-
         return (
-            <>
+            <React.Fragment>
                 <div className="col2-set" id="customer-details">
                     <div className="col-12">
                         <div className="billing-fields mt-4">
@@ -122,7 +130,7 @@ class Form extends Component {
                                 </div>
                                 <div className="validate-required">
                                     <label htmlFor="post-code">تلفن ثابت </label>
-                                    <input type="text" id="post-code"
+                                    <input type="text" id="home"
                                            className="input-name-checkout form-control"
                                     />
                                 </div>
@@ -138,7 +146,7 @@ class Form extends Component {
                         </div>
                     </div>
                 </div>
-            </>
+            </React.Fragment>
         );
     }
 }
@@ -159,6 +167,7 @@ const mapDispatchToProps = dispatch => {
         getCities: (id) => {
             dispatch(fetchCities(id))
         },
+
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Form);

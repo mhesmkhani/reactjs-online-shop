@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {deleteFavorite, fetchFavorite, storeFavorite} from "../../../../redux/actions/FavoriteAction";
 import {fetchCarts, storeCart} from "../../../../redux/actions/CartAction";
+import {Link, Redirect} from "react-router-dom";
 
 class Content extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            quantity: 1
+            quantity: 1,
+            redirect: false
         }
 
     }
@@ -16,6 +18,7 @@ class Content extends Component {
         this.setState({[e.target.name]: e.target.value})
     }
     componentDidMount() {
+
         const apiToken = this.props.auth.apiToken
         if (apiToken.length > 0) {
             const config = {
@@ -48,32 +51,48 @@ class Content extends Component {
     }
 
     handleAddCart = (id) => {
-        const productID = id[0];
-        const config = {
-            headers: {'Authorization': this.props.auth.apiToken}
+        const apiToken = this.props.auth.apiToken;
+        if(apiToken){
+            const productID = id[0];
+            const config = {
+                headers: {'Authorization': this.props.auth.apiToken}
+            }
+            const data = {
+                product_id: productID,
+                quantity: this.state.quantity
+            }
+            this.props.onClickToAddCart(data,config)
+            setTimeout(
+                function() {
+                    this.componentDidMount();
+                }
+                    .bind(this),
+                100
+            )
+        }else{
+            this.setState({
+                redirect: true
+            })
         }
-        const data = {
-            product_id: productID,
-            quantity: this.state.quantity
-       }
-        this.props.onClickToAddCart(data,config)
-        this.componentDidMount();
+
     }
     render() {
+        const {redirect} = this.state
+        if(redirect){
+            return <Redirect to={'/login'}/>
+        }
         const singleProdcut = this.props.singleProduct.singleProduct;
-        const categoryTitle = this.props.breadCrumb.breadCrumb.map(category => category.title);
-        const subcategorieTitle = this.props.breadCrumb.breadCrumb.map(category => category.subcategories.map(subcategorie => subcategorie.title));
+        const breadCrumb = this.props.breadCrumb.breadCrumb;
         const {cart} = this.props;
         const cartData = cart.cart;
         let attributes = [];
         let isCart = false;
         singleProdcut.map((product,index) => {
-            cartData.reduce((fav, el) => {
-                if (el.id !== null && product.id === el.id) {
+            cartData.find(item => {
+                if (item.id === product.id){
                     isCart = true
                 }
-                return fav;
-            }, [])
+            })
         })
          singleProdcut.map(product => product.attributes.map((item, index) => {
                 switch (index) {
@@ -96,8 +115,8 @@ class Content extends Component {
             }
         ))
         return (
+            <React.Fragment>
 
-            <div>
                 <div className="col-lg-7 col-xs-12 pl mt-5 d-block">
                     <section className="product-info">
                         <div className="product-headline">
@@ -112,14 +131,8 @@ class Content extends Component {
                         <div className="product-attributes">
                             <div className="product-config">
                                 <span
-                                    className="product-title-en">Samsung Galaxy Note 10 Dual SIM 256GB Mobile Phone</span>
-                                <div className="product-rate">
-                                    <i className="fa fa-star active"></i>
-                                    <i className="fa fa-star active"></i>
-                                    <i className="fa fa-star active"></i>
-                                    <i className="fa fa-star active"></i>
-                                    <i className="fa fa-star active"></i>
-                                </div>
+                                    className="product-title-en">  {singleProdcut.map(product => product.summary)}</span>
+
                             </div>
                         </div>
                         <div className="product-config-wrapper">
@@ -129,23 +142,9 @@ class Content extends Component {
                                         <span>
                                           <i className="fa fa-archive"></i> دسته:
                                         </span>
-                                        <a  className="product-link product-cat-title">{categoryTitle}</a>
+                                        <a  className="product-link product-cat-title">{breadCrumb.category}</a>
                                         ,
-                                        <a  className="product-link product-cat-title">{subcategorieTitle}</a>
-                                    </li>
-                                    <li>
-                                                <span>
-                                                    <i className="fa fa-tags"></i> برچسب:
-                                                </span>
-                                        <a href="#"
-                                           className="product-link product-tag-title">سامسونگ</a>
-                                    </li>
-                                    <li>
-                                                <span>
-                                                    برند:
-                                                </span>
-                                        <a href="#"
-                                           className="product-link product-tag-title">سامسونگ</a>
+                                        <a  className="product-link product-cat-title">{breadCrumb.subCategory}</a>
                                     </li>
                                 </ul>
                             </div>
@@ -206,10 +205,11 @@ class Content extends Component {
                                         <div className="product-seller-row add-to-cart">
                                             {
                                                 isCart === true ?
-                                                    <a onClick={() => alert("getCheckout")}  className="text-white btn-add-to-cart btn btn-primary">
+                                                    <Link to={'/user/checkout'}  className="text-white btn-add-to-cart btn btn-primary">
                                                         <span className="btn-remove-to-cart-txt"> ادامه فرایند خرید </span>
-                                                    </a>
+                                                    </Link>
                                                     :
+
                                                     <a onClick={() => this.handleAddCart(singleProdcut.map(product => product.id))}  className="text-white btn-add-to-cart btn btn-primary">
                                                         <span className="btn-add-to-cart-txt">افزودن به سبد خرید</span>
                                                     </a>
@@ -221,7 +221,7 @@ class Content extends Component {
                         </div>
                     </section>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }
@@ -232,17 +232,20 @@ const mapStateToProps = (state) => {
         auth: state.auth,
         singleProduct: state.singleProduct,
         breadCrumb: state.breadCrumb,
-        cart: state.cart
+        cart: state.cart,
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
         onClickToAddCart: (producId,config) => {
-            dispatch(storeCart(producId,config))
+            dispatch(storeCart(producId,config , callback => {
+                console.log(callback)
+            }))
         },
         getUserCart: config => {
             dispatch(fetchCarts(config))
         },
+
     }
 }
 

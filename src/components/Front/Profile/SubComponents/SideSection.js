@@ -22,9 +22,10 @@ class SideSection extends Component {
 
 
     render() {
-        const userInfo = this.props.auth.userInfo.data;
+        const userInfo = this.props.auth.userInfo;
+        console.log(userInfo)
         return (
-            <div>
+            <React.Fragment>
                 <div className="col-lg-3 col-md-3 col-xs-12 pr">
                     <div className="sidebar-profile sidebar-navigation">
                         <section className="profile-box">
@@ -39,7 +40,6 @@ class SideSection extends Component {
                                         <span className="profile-box-nameuser">{userInfo.fullname}</span>
                                         :
                                         <span className="profile-box-nameuser">کاربر سرمد</span>
-
                                 }
                                  <br/>
                                 {
@@ -59,34 +59,35 @@ class SideSection extends Component {
                             <ul className="profile-account-navs">
                                 <li className="profile-account-nav-item navigation-link-dashboard">
                                     <NavLink exact to={"/profile"} activeClassName="active">
-                                        <i className="mdi mdi-account-outline"></i>
+                                        <i className="mx-1 mdi mdi-account"></i>
                                         پروفایل
                                     </NavLink>
                                 </li>
                                 <li className="profile-account-nav-item navigation-link-dashboard">
-                                    <NavLink to={"/profile/orders"} activeClassName="active"><i className="mdi mdi-cart"></i>
+                                    <NavLink to={"/profile/orders"} activeClassName="active"><i className="mx-1 mdi mdi-cart"></i>
                                         همه سفارش ها
                                     </NavLink>
                                 </li>
                                 <li className="profile-account-nav-item navigation-link-dashboard">
-                                    <NavLink to={'/profile/favorite'} activeClassName="active"><i className="mdi mdi-heart"></i>
+                                    <NavLink to={'/profile/favorite'} activeClassName="active"><i className="mx-1 mdi mdi-heart"></i>
                                         لیست علاقه مندی
                                     </NavLink>
                                 </li>
                                 <li className="profile-account-nav-item navigation-link-dashboard">
-                                    <NavLink to={"/profile/cart"} activeClassName="active"><i className="mdi mdi-map-outline"></i>
+                                    <NavLink to={"/profile/cart"} activeClassName="active">
+                                        <i className="mx-1 mdi mdi-cart"></i>
                                          سبد خرید
                                     </NavLink>
                                 </li>
                                 <li className="profile-account-nav-item navigation-link-dashboard">
                                     <NavLink to={"/profile/comments"} activeClassName="active"><i
-                                        className="mdi mdi-email-open-outline"></i>
+                                        className="mx-1 mdi mdi-comment-account"></i>
                                         نظرات
                                     </NavLink>
                                 </li>
                                 <li className="profile-account-nav-item navigation-link-dashboard">
                                     <NavLink to={"/profile/information"} activeClassName="active"><i
-                                        className="mdi mdi-tooltip-text-outline"></i>
+                                        className="mx-1 mdi mdi-tooltip-text"></i>
                                         اطلاعات حساب
                                     </NavLink>
                                 </li>
@@ -94,7 +95,7 @@ class SideSection extends Component {
                         </section>
                     </div>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }
@@ -103,6 +104,12 @@ SideSection.propTypes = {};
 const mapStateToProps = (state) => {
     return {
         auth: state.auth
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+
     }
 }
 export default connect(mapStateToProps)(SideSection);

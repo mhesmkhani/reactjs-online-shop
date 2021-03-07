@@ -5,6 +5,7 @@ import validator from "validator";
 import {connect} from "react-redux";
 import * as action from '../../../../redux/actions/AuthAction'
 import axios from "axios";
+import Icon from "../../../../Config/GlobaliCons";
 
 class VerifyCode extends Component {
     constructor(props) {
@@ -100,10 +101,6 @@ class VerifyCode extends Component {
     }
 
     verifyCode = () => {
-
-        this.setState({
-            spinner: true
-        });
         const data = {
             code: this.state.code,
         }
@@ -119,7 +116,6 @@ class VerifyCode extends Component {
                 errors["confirm"] = message;
             }
             this.setState({
-                spinner: false,
                 errors
             })
 
@@ -128,16 +124,17 @@ class VerifyCode extends Component {
 
     render() {
         const {errors, time} = this.state
-        console.log(errors)
         return (
-            <div>
+            <React.Fragment>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg">
                             <section className="page-account-box">
                                 <div className="col-lg-6 col-md-6 col-xs-12 mx-auto">
                                     <div className="ds-userlogin">
-                                        <NavLink to="/" className="account-box-logo">digismart</NavLink>
+                                        <NavLink to={"/"} className={"d-flex justify-content-center"}>
+                                            <img src={Icon.Logo} alt="سرمد"/>
+                                        </NavLink>
                                         <div className="account-box">
                                             <div className="account-box-headline">
                                                 <NavLink to="/login" className="login-ds" activeClassName="active">
@@ -198,7 +195,7 @@ class VerifyCode extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }

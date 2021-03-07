@@ -14,7 +14,7 @@ class Slider extends Component {
 
     render() {
         return (
-            <div>
+            <React.Fragment>
                 <div className="container-main">
                     <div className="d-block">
                         <div className="col-lg-8 col-xs-12 pr">
@@ -598,7 +598,7 @@ class Slider extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }
